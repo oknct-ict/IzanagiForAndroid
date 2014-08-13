@@ -27,7 +27,7 @@ public class WebSocketHandlerSingleton {
 	 * インスタンスの取得
 	 * @return インスタンス
 	 */
-	public WebSocketHandlerSingleton getInstance(){
+	public static WebSocketHandlerSingleton getInstance(){
 		return (mInstance);
 	}
 	
