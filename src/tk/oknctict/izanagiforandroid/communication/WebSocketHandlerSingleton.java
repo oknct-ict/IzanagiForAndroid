@@ -54,6 +54,9 @@ public class WebSocketHandlerSingleton {
 		if (mUri == null){
 			return (ERROR_NO_SETTING_URI);
 		}
+		if (mListener == null){ //mListener‚ª‹ó‚Ìê‡A‰½‚à‚µ‚È‚¢Listener‚ğ’Ç‰Á‚µ‚Ä‚¨‚­
+			mListener = new MyWebSocketHandlerListener();
+		}
 		
 		if ("sdk".equals(Build.PRODUCT)){ //if using emulator, disable IPv6.
 			java.lang.System.setProperty("java.net.preferIPv6Addresses", "false");
