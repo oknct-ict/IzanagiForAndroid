@@ -1,0 +1,9 @@
+package tk.oknctict.izanagiforandroid.communication;
+
+/**
+ * Izanagi for Androidに必要な通信を行うクラス
+ * @author marusa
+ */
+public class Communicator {
+	
+}
