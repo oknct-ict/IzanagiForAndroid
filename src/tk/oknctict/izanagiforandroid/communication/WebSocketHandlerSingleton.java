@@ -10,9 +10,14 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
-public class WebSocketHandler {
-	private static WebSocketHandler mInstance = new WebSocketHandler();
-	private WebSocketHandler() {}
+/**
+ * Websocketをハンドルするシングルトンクラス
+ * @author marusa
+ *
+ */
+public class WebSocketHandlerSingleton {
+	private static WebSocketHandlerSingleton mInstance = new WebSocketHandlerSingleton();
+	private WebSocketHandlerSingleton() {}
 	
 	private static final String TAG = "WebSocketHandler";
 	
@@ -24,7 +29,7 @@ public class WebSocketHandler {
 	 * インスタンスの取得
 	 * @return インスタンス
 	 */
-	public WebSocketHandler getInstance(){
+	public WebSocketHandlerSingleton getInstance(){
 		return (mInstance);
 	}
 	
