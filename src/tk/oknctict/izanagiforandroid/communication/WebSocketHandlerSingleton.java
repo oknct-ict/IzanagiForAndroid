@@ -7,23 +7,20 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import android.os.Build;
-import android.os.Handler;
-import android.util.Log;
 
 /**
  * Websocketをハンドルするシングルトンクラス
  * @author marusa
- *
  */
 public class WebSocketHandlerSingleton {
+	/* for singleton */
 	private static WebSocketHandlerSingleton mInstance = new WebSocketHandlerSingleton();
 	private WebSocketHandlerSingleton() {}
 	
-	private static final String TAG = "WebSocketHandler";
-	
 	private URI mUri = null;
 	private WebSocketClient mClient = null;
-	private Handler mHandler = null;
+	
+	private IWebSocketHandlerListener mListener = new MyWebSocketHandlerListener();
 	
 	/**
 	 * インスタンスの取得
@@ -63,34 +60,25 @@ public class WebSocketHandlerSingleton {
 			java.lang.System.setProperty("java.net.preferIPv4Stack", "true");
 		}
 		
-		mHandler = new Handler();
 		mClient = new WebSocketClient(mUri){
 			@Override
 			public void onOpen(ServerHandshake handshake){
-				Log.d(TAG, "onOpen");
+				mListener.onOpen(handshake);
 			}
 			
 			@Override
 			public void onMessage(final String message){
-				Log.d(TAG, "onMessage");
-				Log.d(TAG, "Message:" + message);
-				mHandler.post(new Runnable(){
-					@Override
-					public void run(){
-						//TODO: implements show toast
-					}
-				});
+				mListener.onMessage(message);
 			}
 			
 			@Override
 			public void onError(Exception ex){
-				Log.d(TAG, "onError");
-				ex.printStackTrace();
+				mListener.onError(ex);
 			}
 			
 			@Override
 			public void onClose(int code, String reason, boolean remote){
-				Log.d(TAG, "onClose");
+				mListener.onClose(code, reason, remote);
 			}
 		};
 		
@@ -99,4 +87,34 @@ public class WebSocketHandlerSingleton {
 		return (0);
 	}
 	public static final int ERROR_NO_SETTING_URI = 1;
+	
+	/**
+	 * WebSocketにイベントが発生したときのリスナ
+	 * @author marusa
+	 */
+	public interface IWebSocketHandlerListener {
+		public void onOpen(ServerHandshake handshakedata);
+		public void onMessage(String message);
+		public void onClose(int code, String reason, boolean remote);
+		public void onError(Exception ex);
+	}
+	
+	/* private */
+	/**
+	 * mListenerがnullを持たなくてよいようにするための空のクラス
+	 * @author media
+	 */
+	private class MyWebSocketHandlerListener implements IWebSocketHandlerListener {
+		@Override
+		public void onOpen(ServerHandshake handshakedata) {}
+
+		@Override
+		public void onMessage(String message) {}
+
+		@Override
+		public void onClose(int code, String reason, boolean remote) {}
+
+		@Override
+		public void onError(Exception ex) {}
+	}
 }
