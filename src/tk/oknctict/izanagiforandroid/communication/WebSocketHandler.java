@@ -6,18 +6,27 @@ import java.net.URISyntaxException;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import tk.oknctict.izanagiforandroid.MainActivity;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 public class WebSocketHandler {
+	private static WebSocketHandler mInstance = new WebSocketHandler();
+	private WebSocketHandler() {}
+	
 	private static final String TAG = "WebSocketHandler";
 	
-	private static URI mUri = null;
-	private static WebSocketClient mClient = null;
-	private static Handler mHandler = null;
+	private URI mUri = null;
+	private WebSocketClient mClient = null;
+	private Handler mHandler = null;
+	
+	/**
+	 * インスタンスの取得
+	 * @return インスタンス
+	 */
+	public WebSocketHandler getInstance(){
+		return (mInstance);
+	}
 	
 	/**
 	 * 接続先のURIのセッタ
@@ -28,7 +37,7 @@ public class WebSocketHandler {
 	 * @param uri プロトコルから始まる接続先のURIを指定します。
 	 * @throws URISyntaxException 不正なURIの場合のException
 	 */
-	public static void setUri(String uri) throws URISyntaxException{
+	public void setUri(String uri) throws URISyntaxException{
 		mUri = new URI(uri);
 	}
 	
@@ -39,7 +48,7 @@ public class WebSocketHandler {
 	 * </pre>
 	 * @return 試行結果。成功なら0,失敗ならエラーコード。
 	 */
-	public static int establishConnection(){
+	public int establishConnection(){
 		if (mUri == null){
 			return (ERROR_NO_SETTING_URI);
 		}
