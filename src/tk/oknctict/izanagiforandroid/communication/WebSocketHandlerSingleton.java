@@ -2,6 +2,7 @@ package tk.oknctict.izanagiforandroid.communication;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.channels.NotYetConnectedException;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -90,6 +91,16 @@ public class WebSocketHandlerSingleton {
 		return (0);
 	}
 	public static final int ERROR_NO_SETTING_URI = 1;
+	
+	/**
+	 * メッセージ送信メソッド
+	 * @param message 送信する文字列
+	 * @throws NotYetConnectedException
+	 * @throws InterruptedException
+	 */
+	public void sendMessage(String message) throws NotYetConnectedException, InterruptedException {
+		mClient.send(message);
+	}
 	
 	/**
 	 * WebSocketにイベントが発生したときのリスナ
