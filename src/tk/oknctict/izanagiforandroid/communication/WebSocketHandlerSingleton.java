@@ -20,7 +20,7 @@ public class WebSocketHandlerSingleton {
 	private URI mUri = null;
 	private WebSocketClient mClient = null;
 	
-	private IWebSocketHandlerListener mListener = new MyWebSocketHandlerListener();
+	private IWebSocketHandlerListener mListener = new EmptyListener();
 	
 	/**
 	 * インスタンスの取得
@@ -55,7 +55,7 @@ public class WebSocketHandlerSingleton {
 			return (ERROR_NO_SETTING_URI);
 		}
 		if (mListener == null){ //mListenerが空の場合、何もしないListenerを追加しておく
-			mListener = new MyWebSocketHandlerListener();
+			mListener = new EmptyListener();
 		}
 		
 		if ("sdk".equals(Build.PRODUCT)){ //if using emulator, disable IPv6.
@@ -107,7 +107,7 @@ public class WebSocketHandlerSingleton {
 	 * mListenerがnullを持たなくてよいようにするための空のクラス
 	 * @author media
 	 */
-	private class MyWebSocketHandlerListener implements IWebSocketHandlerListener {
+	private class EmptyListener implements IWebSocketHandlerListener {
 		@Override
 		public void onOpen(ServerHandshake handshakedata) {}
 
