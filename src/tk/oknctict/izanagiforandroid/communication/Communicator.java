@@ -30,6 +30,19 @@ public class Communicator {
 		
 		wsHandler.setUri(uri);
 	}
+
+	/**
+	 * コネクションの確立
+	 * <pre>
+	 * 設定されているuriへコネクションの確立を試みます。
+	 * </pre>
+	 * @return 試行結果。成功なら0,失敗ならエラーコード。
+	 */
+	public int establishConnection(){
+		int err = wsHandler.establishConnection();
+		return (err);
+	}
+	public static final int ERROR_NO_SETTING_URI = 1;
 	
 	/**
 	 * サーバへログインする
