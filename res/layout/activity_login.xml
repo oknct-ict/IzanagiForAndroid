@@ -15,6 +15,7 @@
         android:layout_weight="0.25"
         android:src="@drawable/logo"
         />
+    
     <View 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -23,53 +24,33 @@
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
         >
-        <View 
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.2"/>
         <EditText
-            android:id="@+id/username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:id="@+id/login_username"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
             android:ems="10"
-            android:hint="@string/login_username_hint" >
+            android:hint="@string/login_username_hint"
+            android:layout_gravity="center">
 
             <requestFocus />
         </EditText>
-        <View 
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.2"/>
-    </LinearLayout>
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-        >
-        <View 
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.2"/>
+        
         <EditText
-            android:id="@+id/passwd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/login_password_hint" >
-        </EditText>
-
-        <View 
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.2"/>
+	        android:id="@+id/login_passwd"
+	        android:layout_width="240dp"
+	        android:layout_height="40dp"
+	        android:ems="10"
+	        android:inputType="textPassword"
+	        android:hint="@string/login_password_hint"
+	        android:layout_gravity="center">
+	    </EditText>
     </LinearLayout>
+    
+    
 
     <View 
         android:layout_width="fill_parent"
