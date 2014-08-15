@@ -7,5 +7,6 @@
     
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
+    <string name="login_login_button">ログイン</string>
 
 </resources>
