@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
 			/* TODO:
 			 * ログイン済みか識別して遷移先の変更を行う
 			 */
-			Intent intent = new Intent(getApplication(), MainActivity.class);
+			Intent intent = new Intent(getApplication(), LoginActivity.class);
 			startActivity(intent);
 			
 			SplashActivity.this.finish();
