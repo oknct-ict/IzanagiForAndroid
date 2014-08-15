@@ -15,9 +15,9 @@ public class SplashActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示
 		setContentView(R.layout.activity_splash);
 		
-		/* 500ms待機 */
+		/* 3600ms待機 */
 		Handler handler = new Handler();
-		handler.postDelayed(new splashHandler(), 500);
+		handler.postDelayed(new splashHandler(), 3600);
 	}
 	
 	class splashHandler implements Runnable {
