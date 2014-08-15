@@ -51,27 +51,12 @@ public class Communicator {
 	 * @return 成功なら0,失敗ならエラーコード
 	 */
 	public int login(String userId, String passwd){
-		/* パスワードのダイジェストの生成 */
-		MessageDigest md = null;
-		try { //ハッシュ関数の用意
-			md = MessageDigest.getInstance("SHA-1");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			return (ERROR_CANNOT_USE_SHA1);
-		}
-		
-		byte[] digest = md.digest(passwd.getBytes());
-		String passwdDigest = "";
-		for (int i = 0; i < digest.length; i++){
-			passwdDigest += Integer.toHexString(digest[i]);
-		}
-		
 		/* JSONObjectの生成 */
 		JSONObject rootObject = new JSONObject();
 		JSONObject dataObject = new JSONObject();
 		try {
 			dataObject.put("user_id", userId);
-			dataObject.put("password", passwdDigest);
+			dataObject.put("password", passwd);
 			
 			rootObject.put("type", "android");
 			rootObject.put("session_id", "");
