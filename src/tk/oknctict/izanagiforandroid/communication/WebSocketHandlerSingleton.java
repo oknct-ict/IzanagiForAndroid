@@ -51,11 +51,19 @@ public class WebSocketHandlerSingleton {
 	 * のようにプロトコル名から始めた接続先のURIを指定してください。
 	 * </pre>
 	 * @param uri プロトコルから始まる接続先のURIを指定します。
+	 * @return 成功なら0、失敗ならエラーコード
 	 * @throws URISyntaxException 不正なURIの場合のException
 	 */
-	public void setUri(String uri) throws URISyntaxException{
+	public int setUri(String uri) throws URISyntaxException{
+		if (mClient != null){
+			return (ERROR_CONNECTING);
+		}
+		
 		mUri = new URI(uri);
+		
+		return (0);
 	}
+	public static final int ERROR_CONNECTING = 1;
 	
 	/**
 	 * コネクションの確立
