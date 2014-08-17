@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 				
 				try {
 					Communicator communicator = new Communicator();
-					//communicator.establishConnection();
+					communicator.establishConnection();
 					communicator.login(username, passwd);
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
