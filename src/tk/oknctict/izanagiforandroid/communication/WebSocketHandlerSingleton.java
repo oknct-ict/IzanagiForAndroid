@@ -79,6 +79,9 @@ public class WebSocketHandlerSingleton {
 		if (mListener == null){ //mListenerが空の場合、何もしないListenerを追加しておく
 			mListener = new EmptyListener();
 		}
+		if (mClient != null){ //既にクライアントが確保されている場合はエラーを返す
+			return (ERROR_ALREADY_CONNECTED);
+		}
 		
 		if ("sdk".equals(Build.PRODUCT)){ //if using emulator, disable IPv6.
 			java.lang.System.setProperty("java.net.preferIPv6Addresses", "false");
@@ -113,6 +116,7 @@ public class WebSocketHandlerSingleton {
 		return (0);
 	}
 	public static final int ERROR_NO_SETTING_URI = 1;
+	public static final int ERROR_ALREADY_CONNECTED = 2;
 	
 	/**
 	 * コネクションを破棄する
