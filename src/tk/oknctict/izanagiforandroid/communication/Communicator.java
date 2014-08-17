@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tk.oknctict.izanagiforandroid.Constants;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton;
 
 /**
@@ -20,15 +21,14 @@ public class Communicator {
 	/**
 	 * コンストラクタ
 	 * <pre>
-	 * uriへの接続の準備をします
+	 * Izanagiサーバへの接続の準備をします。URIはConstants.serverUriで指定しています
 	 * </pre>
-	 * @param uri　接続する先のURI
 	 * @throws URISyntaxException
 	 */
-	public Communicator(String uri) throws URISyntaxException{
+	public Communicator() throws URISyntaxException{
 		wsHandler = WebSocketHandlerSingleton.getInstance();
 		
-		wsHandler.setUri(uri);
+		wsHandler.setUri(Constants.serverWSUri);
 	}
 
 	/**
