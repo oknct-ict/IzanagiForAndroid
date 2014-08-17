@@ -18,8 +18,8 @@ public class WebSocketHandlerSingleton {
 	private static WebSocketHandlerSingleton mInstance = new WebSocketHandlerSingleton();
 	private WebSocketHandlerSingleton() {}
 	
-	private URI mUri = null;
-	private WebSocketClient mClient = null;
+	private static URI mUri = null;
+	private static WebSocketClient mClient = null;
 	
 	private IWebSocketHandlerListener mListener = new EmptyListener();
 	
@@ -29,6 +29,19 @@ public class WebSocketHandlerSingleton {
 	 */
 	public static WebSocketHandlerSingleton getInstance(){
 		return (mInstance);
+	}
+	
+	/**
+	 * コネクションを持っているか確認する
+	 * @return コネクションの有無
+	 */
+	public boolean hasConnection(){
+		if (mClient == null){
+			return (false);
+		}
+		else {
+			return (true);
+		}
 	}
 	
 	/**
@@ -83,6 +96,7 @@ public class WebSocketHandlerSingleton {
 			@Override
 			public void onClose(int code, String reason, boolean remote){
 				mListener.onClose(code, reason, remote);
+				WebSocketHandlerSingleton.delConnection();
 			}
 		};
 		
@@ -91,6 +105,21 @@ public class WebSocketHandlerSingleton {
 		return (0);
 	}
 	public static final int ERROR_NO_SETTING_URI = 1;
+	
+	/**
+	 * コネクションを破棄する
+	 * @return 成功なら0、失敗ならエラーコード
+	 */
+	public static int delConnection(){
+		if (mClient == null){
+			return (ERROR_NO_CONNECTION);
+		}
+		
+		mClient = null;
+		
+		return (0);
+	}
+	public static final int ERROR_NO_CONNECTION = 1;
 	
 	/**
 	 * メッセージ送信メソッド
