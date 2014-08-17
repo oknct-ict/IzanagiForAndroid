@@ -28,7 +28,9 @@ public class Communicator {
 	public Communicator() throws URISyntaxException{
 		wsHandler = WebSocketHandlerSingleton.getInstance();
 		
-		wsHandler.setUri(Constants.serverWSUri);
+		if (wsHandler.hasConnection() == false){
+			wsHandler.setUri(Constants.serverWSUri);
+		}
 	}
 
 	/**
