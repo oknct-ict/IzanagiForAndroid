@@ -2,9 +2,6 @@ package tk.oknctict.izanagiforandroid.communication;
 
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +60,7 @@ public class Communicator {
 			rootObject.put("type", "android");
 			rootObject.put("session_id", "");
 			rootObject.put("command", "login_REQ");
-			rootObject.put("data", dataObject.toString());
+			rootObject.put("data", dataObject);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return (ERROR_CANNOT_GENERATE_JSON);
