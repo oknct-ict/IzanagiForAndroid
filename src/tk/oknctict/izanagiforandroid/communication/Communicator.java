@@ -63,7 +63,7 @@ public class Communicator {
 			rootObject.put("type", "android");
 			rootObject.put("session_id", "");
 			rootObject.put("command", "login_REQ");
-			rootObject.put("data", dataObject.toString());
+			rootObject.put("data", dataObject);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return (ERROR_CANNOT_GENERATE_JSON);

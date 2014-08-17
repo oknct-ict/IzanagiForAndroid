@@ -8,6 +8,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import android.os.Build;
+import android.util.Log;
 
 /**
  * Websocketをハンドルするシングルトンクラス
@@ -89,22 +90,27 @@ public class WebSocketHandlerSingleton {
 			@Override
 			public void onOpen(ServerHandshake handshake){
 				mListener.onOpen(handshake);
+				Log.d("WebSocketHandlerSingleton", "onOpen");
 			}
 			
 			@Override
 			public void onMessage(final String message){
 				mListener.onMessage(message);
+				Log.d("WebSocketHandlerSingleton", "onMessage");
 			}
 			
 			@Override
 			public void onError(Exception ex){
 				mListener.onError(ex);
+				Log.d("WebSocketHandlerSingleton", "onError");
+				ex.printStackTrace();
 			}
 			
 			@Override
 			public void onClose(int code, String reason, boolean remote){
 				mListener.onClose(code, reason, remote);
 				WebSocketHandlerSingleton.delConnection();
+				Log.d("WebSocketHandlerSingleton", "onClose");
 			}
 		};
 		
