@@ -2,6 +2,10 @@ package tk.oknctict.izanagiforandroid.guimanager;
 
 import java.util.HashMap;
 
+/**
+ * GUI全体をマネージするシングルトンなクラス
+ * @author marusa
+ */
 public class GuiManagerSingleton {
 	/* for singleton */
 	private static GuiManagerSingleton instance = new GuiManagerSingleton();
@@ -126,7 +130,7 @@ public class GuiManagerSingleton {
 	/* Inner Classes */
 	/**
 	 * パーツの位置を保存する構造体
-	 * @author media
+	 * @author marusa
 	 */
 	public class Pos {
 		public int x;
