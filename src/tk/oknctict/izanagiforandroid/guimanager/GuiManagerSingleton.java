@@ -41,6 +41,19 @@ public class GuiManagerSingleton {
 		//TODO: 実際の追加処理
 	}
 	
+	/**
+	 * パーツを削除する
+	 * @param partsId 削除したいパーツのID
+	 * @throws PartsIdNotfoundException 
+	 */
+	public void deleteGuiParts(String partsId) throws PartsIdNotfoundException{
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			throw new PartsIdNotfoundException();
+		}
+		
+		//TODO: 実際の削除処理
+	}
+	
 	
 	/* パーツの操作メソッド群 */
 	/**
