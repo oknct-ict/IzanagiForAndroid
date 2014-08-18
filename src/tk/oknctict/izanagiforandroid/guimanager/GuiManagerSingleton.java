@@ -2,6 +2,8 @@ package tk.oknctict.izanagiforandroid.guimanager;
 
 import java.util.HashMap;
 
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
+
 /**
  * GUI全体をマネージするシングルトンなクラス
  * @author marusa
@@ -124,6 +126,20 @@ public class GuiManagerSingleton {
 		//TODO: 実際の取得処理
 		
 		return ("");
+	}
+	
+	/**
+	 * イベントリスナを設定します
+	 * @param partsId セット先のパーツID
+	 * @param listener イベントリスナ
+	 * @throws PartsIdNotfoundException 
+	 */
+	public void setListener(String partsId, GuiPartsEventListener listener) throws PartsIdNotfoundException{
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			throw new PartsIdNotfoundException();
+		}
+		
+		//TODO: 実際の設定処理
 	}
 	
 	
