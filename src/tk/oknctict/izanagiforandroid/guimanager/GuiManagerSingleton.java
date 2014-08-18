@@ -16,6 +16,7 @@ public class GuiManagerSingleton {
 	}
 	/* end for singleton */
 	
+	
 	private HashMap<String, GuiPartsHandler> guiPartsHashMap = new HashMap<String, GuiPartsHandler>();
 	
 	/**
@@ -34,14 +35,38 @@ public class GuiManagerSingleton {
 	public int addGuiParts(String partsId, String type, Pos initialPos){
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
-			return (ERROR_CONFLICT_ID);
+			//TODO: 例外のスロー
 		}
 		
-		//TODO: 実際の追加処理を行う
+		//TODO: 実際の追加処理
 		
 		return (0);
 	}
-	public static final int ERROR_CONFLICT_ID = 1;
+	
+	
+	/* パーツの操作メソッド群 */
+	/**
+	 * 位置を変更するメソッド
+	 * @param partsId　変更するパーツのID
+	 * @param pos 座標指定
+	 */
+	public int setPosition(String partsId, Pos pos){
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			//TODO: 例外のスロー
+		}
+		
+		//TODO: 実際の設定処理
+		
+		return (0);
+	}
+	
+	public Pos getPosition(String partsId){
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			//TODO: 例外のスロー
+		}
+		
+		return (new Pos(0, 0));
+	}
 	
 	
 	/* Inner Classes */
