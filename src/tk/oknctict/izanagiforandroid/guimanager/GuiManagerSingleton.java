@@ -30,42 +30,50 @@ public class GuiManagerSingleton {
 	 * @param partsId 任意のパーツID
 	 * @param type パーツのタイプ
 	 * @param initialPos 初期位置
-	 * @return 成功なら0、失敗ならエラーコード
+	 * @throws PartsIdConflictException 
 	 */
-	public int addGuiParts(String partsId, String type, Pos initialPos){
+	public void addGuiParts(String partsId, String type, Pos initialPos) throws PartsIdConflictException{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
-			//TODO: 例外のスロー
+			throw new PartsIdConflictException();
 		}
 		
 		//TODO: 実際の追加処理
-		
-		return (0);
 	}
 	
 	
 	/* パーツの操作メソッド群 */
 	/**
-	 * 位置を変更するメソッド
+	 * パーツの位置を変更するメソッド
 	 * @param partsId　変更するパーツのID
 	 * @param pos 座標指定
+	 * @throws PartsIdNotfoundException
 	 */
-	public int setPosition(String partsId, Pos pos){
+	public void setPosition(String partsId, Pos pos) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
-			//TODO: 例外のスロー
+			throw new PartsIdNotfoundException();
 		}
 		
 		//TODO: 実際の設定処理
-		
-		return (0);
 	}
 	
-	public Pos getPosition(String partsId){
+	/**
+	 * パーツの位置を取得するメソッド
+	 * @param partsId 位置を取得したいパーツのID
+	 * @return　パーツの座標
+	 * @throws PartsIdNotfoundException
+	 */
+	public Pos getPosition(String partsId) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
-			//TODO: 例外のスロー
+			throw new PartsIdNotfoundException();
 		}
 		
-		return (new Pos(0, 0));
+		//TODO: 実際の取得処理
+		Pos partsPos = new Pos();
+		partsPos.x = 0;
+		partsPos.y = 0;
+		
+		return (partsPos);
 	}
 	
 	
@@ -77,6 +85,11 @@ public class GuiManagerSingleton {
 	public class Pos {
 		public int x;
 		public int y;
+		
+		/**
+		 * コンストラクタ
+		 */
+		public Pos(){};
 		
 		/**
 		 * コンストラクタ
