@@ -91,4 +91,21 @@ public class GuiManagerSingleton {
 			y = iy;
 		}
 	}
+
+	
+	/* —áŠOŒQ */
+	public class PartsIdConflictException extends Exception {
+		public PartsIdConflictException(){
+			super("partId is already exists.");
+		}
+		private static final long serialVersionUID = -8940594564735678038L;
+	}
+	
+	public class PartsIdNotfoundException extends Exception {
+		public PartsIdNotfoundException(){
+			super("partsId is not found.");
+		}
+		
+		private static final long serialVersionUID = 1421375205147951206L;
+	}
 }
