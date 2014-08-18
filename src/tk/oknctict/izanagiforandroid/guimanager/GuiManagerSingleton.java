@@ -29,16 +29,16 @@ public class GuiManagerSingleton {
 	 * パーツを追加する
 	 * <pre>
 	 * 任意のパーツIDでtypeで指定したGUIパーツを生成します。
-	 * addした時点でinitialPosの位置にパーツが描画されます。
+	 * addした時点でinitialPosの位置にパーツが描画されます。パーツIDはGuiPartsHandlerに定数定義されています。
 	 * <br />
 	 * <b>パーツIDは重複してはいけません。</b>パーツIDが重複している場合はERROR_CONFLICT_IDを返します。
 	 * </pre>
 	 * @param partsId 任意のパーツID
-	 * @param type パーツのタイプ
+	 * @param partsType パーツのタイプ
 	 * @param initialPos 初期位置
 	 * @throws PartsIdConflictException 
 	 */
-	public void addGuiParts(String partsId, String type, Pos initialPos) throws PartsIdConflictException{
+	public void addGuiParts(String partsId, int partsType, Pos initialPos) throws PartsIdConflictException{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			throw new PartsIdConflictException();
