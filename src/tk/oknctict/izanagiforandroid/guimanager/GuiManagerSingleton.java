@@ -3,6 +3,19 @@ package tk.oknctict.izanagiforandroid.guimanager;
 import java.util.HashMap;
 
 public class GuiManagerSingleton {
+	/* for singleton */
+	private static GuiManagerSingleton instance = new GuiManagerSingleton();
+	private GuiManagerSingleton(){}
+	
+	/**
+	 * インスタンスの取得
+	 * @return インスタンス
+	 */
+	public static GuiManagerSingleton getInstance(){
+		return (instance);
+	}
+	/* end for singleton */
+	
 	private HashMap<String, GuiPartsHandler> guiPartsHashMap = new HashMap<String, GuiPartsHandler>();
 	
 	/**
@@ -23,6 +36,8 @@ public class GuiManagerSingleton {
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			return (ERROR_CONFLICT_ID);
 		}
+		
+		//TODO: 実際の追加処理を行う
 		
 		return (0);
 	}
