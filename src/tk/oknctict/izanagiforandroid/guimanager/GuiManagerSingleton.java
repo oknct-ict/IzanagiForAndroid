@@ -134,7 +134,7 @@ public class GuiManagerSingleton {
 	 * @param listener イベントリスナ
 	 * @throws PartsIdNotfoundException 
 	 */
-	public void setListener(String partsId, GuiPartsEventListener listener) throws PartsIdNotfoundException{
+	public void setEventListener(String partsId, GuiPartsEventListener listener) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
 			throw new PartsIdNotfoundException();
 		}
