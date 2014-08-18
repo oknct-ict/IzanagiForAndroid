@@ -89,6 +89,39 @@ public class GuiManagerSingleton {
 		return (partsPos);
 	}
 	
+	/**
+	 * パーツにテキストを設定します
+	 * @param partsId テキストをセットするパーツ
+	 * @param text セットするテキスト
+	 * @throws PartsIdNotfoundException 
+	 */
+	public void setText(String partsId, String text) throws PartsIdNotfoundException{
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			throw new PartsIdNotfoundException();
+		}
+		
+		//TODO: 実際の設定処理
+	}
+	
+	/**
+	 * パーツからテキストを取得します
+	 * <pre>
+	 * もしテキストを取得できないようなパーツだった場合、空文字列が返ります。
+	 * </pre>
+	 * @param partsId テキストを取得するパーツのID
+	 * @return 取得したテキスト
+	 * @throws PartsIdNotfoundException
+	 */
+	public String getText(String partsId) throws PartsIdNotfoundException{
+		if (guiPartsHashMap.containsKey(partsId) == false){
+			throw new PartsIdNotfoundException();
+		}
+		
+		//TODO: 実際の取得処理
+		
+		return ("");
+	}
+	
 	
 	/* Inner Classes */
 	/**
