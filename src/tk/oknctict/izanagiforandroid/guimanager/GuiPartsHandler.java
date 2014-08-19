@@ -20,6 +20,7 @@ public class GuiPartsHandler {
 	private View mView;
 	private int mPartsType;
 	private LayoutParams mLayoutParams;
+	private RelativeLayout canvas; //描画先のレイアウト
 	
 	/**
 	 * コンストラクタ
@@ -35,13 +36,8 @@ public class GuiPartsHandler {
 			throw new UndefinedPartsTypeException();
 		}
 		
-		mPartsType = partsType;
-		mLayoutParams = layoutParams;
-		
 		/* GUI部品の生成 */
-		RelativeLayout relativeLayout = (RelativeLayout)((Activity)context).findViewById(R.id.izanagi_execute_layout);
-		RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(layoutParams.width, layoutParams.height);
-		param.setMargins(layoutParams.x, layoutParams.y, 0, 0);
+		canvas = (RelativeLayout)((Activity)context).findViewById(R.id.izanagi_execute_layout); //描画先の設定
 		switch (mPartsType){
 		case PARTS_TYPE_BUTTON:
 			mView = new Button(context);
@@ -63,7 +59,12 @@ public class GuiPartsHandler {
 			//TODO: Shapeの定義しましょう
 			break;
 		}
-		relativeLayout.addView(mView, param);
+		
+		mPartsType = partsType;
+		mLayoutParams = layoutParams;
+		setLayoutParams2View();
+		
+		canvas.addView(mView);
 	}
 	public static final int PARTS_TYPE_BUTTON = 1;
 	public static final int PARTS_TYPE_TEXTVIEW = 2;
@@ -78,6 +79,34 @@ public class GuiPartsHandler {
 	 */
 	public int getPartsType(){
 		return (mPartsType);
+	}
+	
+	/**
+	 * レイアウトパラメータのセッタ
+	 * <pre>
+	 * 新しくパラメータをセットするとすぐに反映されます。
+	 * </pre>
+	 * @param layoutParams
+	 */
+	public void setLayoutParams(LayoutParams layoutParams){
+		mLayoutParams = layoutParams;
+		setLayoutParams2View();
+	}
+	
+	/**
+	 * レイアウトパラメータのゲッタ
+	 * @return レイアウトパラメータ
+	 */
+	public LayoutParams getLayoutParams(){
+		return (mLayoutParams);
+	}
+	
+	
+	/* private */
+	private void setLayoutParams2View(){
+		RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(mLayoutParams.width, mLayoutParams.height);
+		param.setMargins(mLayoutParams.x, mLayoutParams.y, 0, 0);
+		mView.setLayoutParams(param);
 	}
 	
 	/* Inner Classes */
