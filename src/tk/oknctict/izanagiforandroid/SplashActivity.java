@@ -1,5 +1,8 @@
 package tk.oknctict.izanagiforandroid;
 
+import java.net.URISyntaxException;
+
+import tk.oknctict.izanagiforandroid.communication.Communicator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +17,13 @@ public class SplashActivity extends Activity {
 		/* レイアウト */
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示
 		setContentView(R.layout.activity_splash);
+		
+		try {
+			Communicator communicator = new Communicator();
+			communicator.establishConnection();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		
 		/* 3600ms待機 */
 		Handler handler = new Handler();

@@ -34,7 +34,7 @@
         </activity>
         <activity
             android:name=".IzanagiExecuteActivity"
-            android:label="@string/title_activity_izanagi_execute"
+            android:label="@string/app_name"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >"
         </activity>
     </application>

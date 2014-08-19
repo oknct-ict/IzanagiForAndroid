@@ -79,7 +79,7 @@ public class WebSocketHandlerSingleton {
 		if (mListener == null){ //mListenerが空の場合、何もしないListenerを追加しておく
 			mListener = new EmptyListener();
 		}
-		if (mClient != null){ //既にクライアントが確保されている場合はエラーを返す
+		if (hasConnection() == true){ //既にクライアントが確保されている場合はエラーを返す
 			return (ERROR_ALREADY_CONNECTED);
 		}
 		

@@ -2,8 +2,10 @@ package tk.oknctict.izanagiforandroid.guimanager;
 
 import java.util.HashMap;
 
+import android.content.Context;
+import tk.oknctict.izanagiforandroid.IzanagiExecuteActivityHolder;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
-import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.UndefinedPartsTypeException;
 
 /**
  * GUI全体をマネージするシングルトンなクラス
@@ -25,27 +27,34 @@ public class GuiManagerSingleton {
 	
 	
 	private HashMap<String, GuiPartsHandler> guiPartsHashMap = new HashMap<String, GuiPartsHandler>();
+	//private Context mContext;
 	
 	/**
 	 * パーツを追加する
 	 * <pre>
 	 * 任意のパーツIDでtypeで指定したGUIパーツを生成します。
-	 * addした時点でinitialPosの位置にパーツが描画されます。
+	 * addした時点でinitialPosの位置にパーツが描画されます。パーツIDはGuiPartsHandlerに定数定義されています。
 	 * <br />
 	 * <b>パーツIDは重複してはいけません。</b>パーツIDが重複している場合はERROR_CONFLICT_IDを返します。
 	 * </pre>
 	 * @param partsId 任意のパーツID
-	 * @param type パーツのタイプ
-	 * @param initialPos 初期位置
+	 * @param partsType パーツのタイプ
+	 * @param layoutParams 初期レイアウトパラメータ
 	 * @throws PartsIdConflictException 
+	 * @throws UndefinedPartsTypeException 
+	 * @throws NotStartedExecuteActivity
 	 */
-	public void addGuiParts(String partsId, String type, Pos initialPos) throws PartsIdConflictException{
+	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException, UndefinedPartsTypeException, NotStartedExecuteActivity{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			throw new PartsIdConflictException();
 		}
 		
-		//TODO: 実際の追加処理
+		Context context = IzanagiExecuteActivityHolder.getContext();
+		if (context == null){
+			throw new NotStartedExecuteActivity();
+		}
+		guiPartsHashMap.put(partsId, new GuiPartsHandler(context, partsType, layoutParams));
 	}
 	
 	/**
@@ -64,36 +73,33 @@ public class GuiManagerSingleton {
 	
 	/* パーツの操作メソッド群 */
 	/**
-	 * パーツの位置を変更するメソッド
-	 * @param partsId　変更するパーツのID
-	 * @param pos 座標指定
+	 * レイアウトのパラメータを設定します
+	 * @param partsId 設定するパーツのID
+	 * @param layoutParams 設定するパラメータ
 	 * @throws PartsIdNotfoundException
 	 */
-	public void setPosition(String partsId, Pos pos) throws PartsIdNotfoundException{
+	public void setLayoutParams(String partsId, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
 			throw new PartsIdNotfoundException();
 		}
 		
-		//TODO: 実際の設定処理
+		GuiPartsHandler parts = guiPartsHashMap.get(partsId);
+		parts.setLayoutParams(layoutParams);
 	}
 	
 	/**
-	 * パーツの位置を取得するメソッド
-	 * @param partsId 位置を取得したいパーツのID
-	 * @return　パーツの座標
+	 * レイアウトのパラメータを取得します
+	 * @param partsId 取得するパーツのID
+	 * @return レイアウトのパラメータ
 	 * @throws PartsIdNotfoundException
 	 */
-	public Pos getPosition(String partsId) throws PartsIdNotfoundException{
+	public GuiPartsHandler.LayoutParams getLayoutParams(String partsId) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
 			throw new PartsIdNotfoundException();
 		}
 		
-		//TODO: 実際の取得処理
-		Pos partsPos = new Pos();
-		partsPos.x = 0;
-		partsPos.y = 0;
-		
-		return (partsPos);
+		GuiPartsHandler parts = guiPartsHashMap.get(partsId);
+		return (parts.getLayoutParams());
 	}
 	
 	/**
@@ -161,5 +167,13 @@ public class GuiManagerSingleton {
 		}
 		
 		private static final long serialVersionUID = 1421375205147951206L;
+	}
+	
+	public class NotStartedExecuteActivity extends Exception {
+		public NotStartedExecuteActivity(){
+			super("Not started izanagi execute activity.");
+		}
+		
+		private static final long serialVersionUID = 7027429261284500743L;
 	}
 }
