@@ -3,6 +3,7 @@ package tk.oknctict.izanagiforandroid.guimanager;
 import java.util.HashMap;
 
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
 
 /**
  * GUI全体をマネージするシングルトンなクラス
@@ -144,33 +145,7 @@ public class GuiManagerSingleton {
 	
 	
 	/* Inner Classes */
-	/**
-	 * パーツの位置を保存する構造体
-	 * @author marusa
-	 */
-	public class Pos {
-		public int x;
-		public int y;
-		
-		/**
-		 * コンストラクタ
-		 */
-		public Pos(){};
-		
-		/**
-		 * コンストラクタ
-		 * <pre>
-		 * 引数で指定した座標で初期化します
-		 * </pre>
-		 * @param ix x座標の初期化値
-		 * @param iy y座標の初期化値
-		 */
-		public Pos(int ix, int iy){
-			x = ix;
-			y = iy;
-		}
-	}
-
+	//Nothing
 	
 	/* 例外群 */
 	public class PartsIdConflictException extends Exception {
