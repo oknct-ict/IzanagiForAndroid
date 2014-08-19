@@ -38,40 +38,32 @@ public class GuiPartsHandler {
 		mPartsType = partsType;
 		mLayoutParams = layoutParams;
 		
+		/* GUIïîïiÇÃê∂ê¨ */
 		RelativeLayout relativeLayout = (RelativeLayout)((Activity)context).findViewById(R.id.izanagi_execute_layout);
+		RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(layoutParams.width, layoutParams.height);
+		param.setMargins(layoutParams.x, layoutParams.y, 0, 0);
 		switch (mPartsType){
 		case PARTS_TYPE_BUTTON:
-			Button buttonTemp = new Button(context);
-			relativeLayout.addView(buttonTemp, layoutParams.width, layoutParams.height);
-			
-			mView = (View)buttonTemp;
+			mView = new Button(context);
 			break;
 			
 		case PARTS_TYPE_TEXTVIEW:
-			TextView textViewTemp = new TextView(context);
-			relativeLayout.addView(textViewTemp, layoutParams.width, layoutParams.height);
-			
-			mView = (View)textViewTemp;
+			mView = new TextView(context);
 			break;
 			
 		case PARTS_TYPE_EDITTEXT:
-			EditText editTextTemp = new EditText(context);
-			relativeLayout.addView(editTextTemp, layoutParams.width, layoutParams.height);
-			
-			mView = (View)editTextTemp;
+			mView = new EditText(context);
 			break;
 			
 		case PARTS_TYPE_IMAGEVIEW:
-			ImageView imageViewTemp = new ImageView(context);
-			relativeLayout.addView(imageViewTemp, layoutParams.width, layoutParams.height);
-			
-			mView = (View)imageViewTemp;
+			mView = new ImageView(context);
 			break;
 			
 		case PARTS_TYPE_SHAPE:
 			//TODO: ShapeÇÃíËã`ÇµÇ‹ÇµÇÂÇ§
 			break;
 		}
+		relativeLayout.addView(mView, param);
 	}
 	public static final int PARTS_TYPE_BUTTON = 1;
 	public static final int PARTS_TYPE_TEXTVIEW = 2;
