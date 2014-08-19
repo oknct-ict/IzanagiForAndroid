@@ -2,10 +2,14 @@ package tk.oknctict.izanagiforandroid.guimanager;
 
 import java.util.HashMap;
 
+import tk.oknctict.izanagiforandroid.R;
+import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -24,28 +28,30 @@ public class GuiPartsHandler {
 	 * @param partsType
 	 * @throws UndefinedPartsTypeException 
 	 */
-	public GuiPartsHandler(int partsType) throws UndefinedPartsTypeException{
+	public GuiPartsHandler(Context context, int partsType) throws UndefinedPartsTypeException{
 		/* 存在しないパーツタイプのチェック */
 		if (partsType <= 0 || PARTS_TYPE_COUNT_PLUSONE <= partsType){
 			throw new UndefinedPartsTypeException();
 		}
 		
 		mPartsType = partsType;
+		
+		RelativeLayout relativeLayout = (RelativeLayout)((Activity)context).findViewById(R.id.izanagi_execute_layout);
 		switch (mPartsType){
 		case PARTS_TYPE_BUTTON:
-			mView = (View)(new Button(null));
+			Button buttonTemp = new Button(context);
 			break;
 			
 		case PARTS_TYPE_TEXTVIEW:
-			mView = (View)(new TextView(null));
+			TextView textViewTemp = new TextView(context);
 			break;
 			
 		case PARTS_TYPE_EDITTEXT:
-			mView = (View)(new EditText(null));
+			EditText editTextTemp = new EditText(context);
 			break;
 			
 		case PARTS_TYPE_IMAGEVIEW:
-			mView = (View)(new ImageView(null));
+			ImageView imageViewTemp = new ImageView(context);
 			break;
 			
 		case PARTS_TYPE_SHAPE:
@@ -60,6 +66,10 @@ public class GuiPartsHandler {
 	public static final int PARTS_TYPE_SHAPE = 5;
 	public static final int PARTS_TYPE_COUNT_PLUSONE = 6;
 	
+	/**
+	 * パーツタイプの取得
+	 * @return パーツタイプ
+	 */
 	public int getPartsType(){
 		return (mPartsType);
 	}
