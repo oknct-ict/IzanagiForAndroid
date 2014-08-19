@@ -51,7 +51,6 @@ public class GuiManagerSingleton {
 			throw new PartsIdConflictException();
 		}
 		
-		//TODO: é¿ç€ÇÃí«â¡èàóù
 		Context context = IzanagiExecuteActivityHolder.getContext();
 		if (context == null){
 			throw new NotStartedExecuteActivity();
