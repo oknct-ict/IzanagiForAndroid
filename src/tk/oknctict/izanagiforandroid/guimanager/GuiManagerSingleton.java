@@ -3,6 +3,7 @@ package tk.oknctict.izanagiforandroid.guimanager;
 import java.util.HashMap;
 
 import android.content.Context;
+import tk.oknctict.izanagiforandroid.IzanagiExecuteActivityHolder;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.UndefinedPartsTypeException;
@@ -27,7 +28,7 @@ public class GuiManagerSingleton {
 	
 	
 	private HashMap<String, GuiPartsHandler> guiPartsHashMap = new HashMap<String, GuiPartsHandler>();
-	private Context mContext;
+	//private Context mContext;
 	
 	/**
 	 * ÉpÅ[ÉcÇí«â¡Ç∑ÇÈ
@@ -50,7 +51,11 @@ public class GuiManagerSingleton {
 		}
 		
 		//TODO: é¿ç€ÇÃí«â¡èàóù
-		guiPartsHashMap.put(partsId, new GuiPartsHandler(mContext, partsType, layoutParams));
+		Context context = IzanagiExecuteActivityHolder.getContext();
+		if (context == null){
+			
+		}
+		guiPartsHashMap.put(partsId, new GuiPartsHandler(context, partsType, layoutParams));
 	}
 	
 	/**
