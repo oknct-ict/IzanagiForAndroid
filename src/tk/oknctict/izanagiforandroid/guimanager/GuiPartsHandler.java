@@ -130,6 +130,9 @@ public class GuiPartsHandler {
 	
 	/**
 	 * パーツのレイアウト情報を保存する構造体
+	 * 幅や高さは、ピクセル単位の他に、以下の二つが指定できます。
+	 * ViewGroup.LayoutParams.FILL_PARENT
+	 * ViewGroup.LayoutParams.WRAP_CONTENT
 	 * @author marusa
 	 */
 	public static class LayoutParams{
