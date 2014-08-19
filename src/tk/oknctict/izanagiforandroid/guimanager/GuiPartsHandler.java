@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class GuiPartsHandler {
 	private View mView;
 	private int mPartsType;
-	private Pos mPos;
+	private LayoutParams mLayoutParams;
 	
 	/**
 	 * コンストラクタ
@@ -36,27 +36,36 @@ public class GuiPartsHandler {
 		}
 		
 		mPartsType = partsType;
+		mLayoutParams = layoutParams;
 		
 		RelativeLayout relativeLayout = (RelativeLayout)((Activity)context).findViewById(R.id.izanagi_execute_layout);
 		switch (mPartsType){
 		case PARTS_TYPE_BUTTON:
 			Button buttonTemp = new Button(context);
 			relativeLayout.addView(buttonTemp, layoutParams.width, layoutParams.height);
+			
+			mView = (View)buttonTemp;
 			break;
 			
 		case PARTS_TYPE_TEXTVIEW:
 			TextView textViewTemp = new TextView(context);
 			relativeLayout.addView(textViewTemp, layoutParams.width, layoutParams.height);
+			
+			mView = (View)textViewTemp;
 			break;
 			
 		case PARTS_TYPE_EDITTEXT:
 			EditText editTextTemp = new EditText(context);
 			relativeLayout.addView(editTextTemp, layoutParams.width, layoutParams.height);
+			
+			mView = (View)editTextTemp;
 			break;
 			
 		case PARTS_TYPE_IMAGEVIEW:
 			ImageView imageViewTemp = new ImageView(context);
 			relativeLayout.addView(imageViewTemp, layoutParams.width, layoutParams.height);
+			
+			mView = (View)imageViewTemp;
 			break;
 			
 		case PARTS_TYPE_SHAPE:
