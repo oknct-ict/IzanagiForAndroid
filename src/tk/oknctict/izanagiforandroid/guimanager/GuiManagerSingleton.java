@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import android.content.Context;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
-import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.LayoutParams;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.UndefinedPartsTypeException;
 
@@ -42,20 +41,16 @@ public class GuiManagerSingleton {
 	 * @param partsType パーツのタイプ
 	 * @param layoutParams 初期レイアウトパラメータ
 	 * @throws PartsIdConflictException 
+	 * @throws UndefinedPartsTypeException 
 	 */
-	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException{
+	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException, UndefinedPartsTypeException{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			throw new PartsIdConflictException();
 		}
 		
 		//TODO: 実際の追加処理
-		try {
-			guiPartsHashMap.put(partsId, new GuiPartsHandler(mContext, partsType, layoutParams));
-		} catch (UndefinedPartsTypeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		guiPartsHashMap.put(partsId, new GuiPartsHandler(mContext, partsType, layoutParams));
 	}
 	
 	/**
