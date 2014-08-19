@@ -74,36 +74,33 @@ public class GuiManagerSingleton {
 	
 	/* パーツの操作メソッド群 */
 	/**
-	 * パーツの位置を変更するメソッド
-	 * @param partsId　変更するパーツのID
-	 * @param pos 座標指定
+	 * レイアウトのパラメータを設定します
+	 * @param partsId 設定するパーツのID
+	 * @param layoutParams 設定するパラメータ
 	 * @throws PartsIdNotfoundException
 	 */
-	public void setPosition(String partsId, Pos pos) throws PartsIdNotfoundException{
+	public void setLayoutParams(String partsId, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
 			throw new PartsIdNotfoundException();
 		}
 		
-		//TODO: 実際の設定処理
+		GuiPartsHandler parts = guiPartsHashMap.get(partsId);
+		parts.setLayoutParams(layoutParams);
 	}
 	
 	/**
-	 * パーツの位置を取得するメソッド
-	 * @param partsId 位置を取得したいパーツのID
-	 * @return　パーツの座標
+	 * レイアウトのパラメータを取得します
+	 * @param partsId 取得するパーツのID
+	 * @return レイアウトのパラメータ
 	 * @throws PartsIdNotfoundException
 	 */
-	public Pos getPosition(String partsId) throws PartsIdNotfoundException{
+	public GuiPartsHandler.LayoutParams getLayoutParams(String partsId) throws PartsIdNotfoundException{
 		if (guiPartsHashMap.containsKey(partsId) == false){
 			throw new PartsIdNotfoundException();
 		}
 		
-		//TODO: 実際の取得処理
-		Pos partsPos = new Pos();
-		partsPos.x = 0;
-		partsPos.y = 0;
-		
-		return (partsPos);
+		GuiPartsHandler parts = guiPartsHashMap.get(partsId);
+		return (parts.getLayoutParams());
 	}
 	
 	/**
