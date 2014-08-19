@@ -43,8 +43,9 @@ public class GuiManagerSingleton {
 	 * @param layoutParams 初期レイアウトパラメータ
 	 * @throws PartsIdConflictException 
 	 * @throws UndefinedPartsTypeException 
+	 * @throws NotStartedExecuteActivity
 	 */
-	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException, UndefinedPartsTypeException{
+	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException, UndefinedPartsTypeException, NotStartedExecuteActivity{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			throw new PartsIdConflictException();
@@ -53,7 +54,7 @@ public class GuiManagerSingleton {
 		//TODO: 実際の追加処理
 		Context context = IzanagiExecuteActivityHolder.getContext();
 		if (context == null){
-			
+			throw new NotStartedExecuteActivity();
 		}
 		guiPartsHashMap.put(partsId, new GuiPartsHandler(context, partsType, layoutParams));
 	}
@@ -171,5 +172,13 @@ public class GuiManagerSingleton {
 		}
 		
 		private static final long serialVersionUID = 1421375205147951206L;
+	}
+	
+	public class NotStartedExecuteActivity extends Exception {
+		public NotStartedExecuteActivity(){
+			super("Not started izanagi execute activity.");
+		}
+		
+		private static final long serialVersionUID = 7027429261284500743L;
 	}
 }
