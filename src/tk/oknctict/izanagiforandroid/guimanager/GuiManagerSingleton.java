@@ -5,7 +5,6 @@ import java.util.HashMap;
 import android.content.Context;
 import tk.oknctict.izanagiforandroid.IzanagiExecuteActivityHolder;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
-import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.UndefinedPartsTypeException;
 
 /**
