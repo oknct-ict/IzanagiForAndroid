@@ -2,8 +2,10 @@ package tk.oknctict.izanagiforandroid.guimanager;
 
 import java.util.HashMap;
 
+import android.content.Context;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.Pos;
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.UndefinedPartsTypeException;
 
 /**
  * GUI全体をマネージするシングルトンなクラス
@@ -25,6 +27,7 @@ public class GuiManagerSingleton {
 	
 	
 	private HashMap<String, GuiPartsHandler> guiPartsHashMap = new HashMap<String, GuiPartsHandler>();
+	private Context mContext;
 	
 	/**
 	 * パーツを追加する
@@ -36,16 +39,18 @@ public class GuiManagerSingleton {
 	 * </pre>
 	 * @param partsId 任意のパーツID
 	 * @param partsType パーツのタイプ
-	 * @param initialPos 初期位置
+	 * @param layoutParams 初期レイアウトパラメータ
 	 * @throws PartsIdConflictException 
+	 * @throws UndefinedPartsTypeException 
 	 */
-	public void addGuiParts(String partsId, int partsType, Pos initialPos) throws PartsIdConflictException{
+	public void addGuiParts(String partsId, int partsType, GuiPartsHandler.LayoutParams layoutParams) throws PartsIdConflictException, UndefinedPartsTypeException{
 		/* IDが重複していないか確認する */
 		if (guiPartsHashMap.containsKey(partsId) == true){
 			throw new PartsIdConflictException();
 		}
 		
 		//TODO: 実際の追加処理
+		guiPartsHashMap.put(partsId, new GuiPartsHandler(mContext, partsType, layoutParams));
 	}
 	
 	/**
