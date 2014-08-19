@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class GuiPartsHandler {
 	private View mView;
 	private int mPartsType;
+	private Pos mPos;
 	
 	/**
 	 * コンストラクタ
@@ -79,11 +80,38 @@ public class GuiPartsHandler {
 	 * GUIパーツのイベントリスナを保持するクラスです。
 	 * @author marusa
 	 */
-	public class GuiPartsEventListener{
+	public static class GuiPartsEventListener{
 		private HashMap<String, String> listenerMap = new HashMap<String, String>();
 		
 		public void addMap(String type, String functionId){
 			listenerMap.put(type, functionId);
+		}
+	}
+	
+	/**
+	 * パーツの位置を保存する構造体
+	 * @author marusa
+	 */
+	public static class Pos {
+		public int x;
+		public int y;
+		
+		/**
+		 * コンストラクタ
+		 */
+		public Pos(){};
+		
+		/**
+		 * コンストラクタ
+		 * <pre>
+		 * 引数で指定した座標で初期化します
+		 * </pre>
+		 * @param ix x座標の初期化値
+		 * @param iy y座標の初期化値
+		 */
+		public Pos(int ix, int iy){
+			x = ix;
+			y = iy;
 		}
 	}
 	
