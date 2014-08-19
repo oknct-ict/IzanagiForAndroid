@@ -29,7 +29,7 @@ public class GuiPartsHandler {
 	 * @param partsType
 	 * @throws UndefinedPartsTypeException 
 	 */
-	public GuiPartsHandler(Context context, int partsType) throws UndefinedPartsTypeException{
+	public GuiPartsHandler(Context context, int partsType, LayoutParams layoutParams) throws UndefinedPartsTypeException{
 		/* 存在しないパーツタイプのチェック */
 		if (partsType <= 0 || PARTS_TYPE_COUNT_PLUSONE <= partsType){
 			throw new UndefinedPartsTypeException();
@@ -41,18 +41,22 @@ public class GuiPartsHandler {
 		switch (mPartsType){
 		case PARTS_TYPE_BUTTON:
 			Button buttonTemp = new Button(context);
+			relativeLayout.addView(buttonTemp, layoutParams.width, layoutParams.height);
 			break;
 			
 		case PARTS_TYPE_TEXTVIEW:
 			TextView textViewTemp = new TextView(context);
+			relativeLayout.addView(textViewTemp, layoutParams.width, layoutParams.height);
 			break;
 			
 		case PARTS_TYPE_EDITTEXT:
 			EditText editTextTemp = new EditText(context);
+			relativeLayout.addView(editTextTemp, layoutParams.width, layoutParams.height);
 			break;
 			
 		case PARTS_TYPE_IMAGEVIEW:
 			ImageView imageViewTemp = new ImageView(context);
+			relativeLayout.addView(imageViewTemp, layoutParams.width, layoutParams.height);
 			break;
 			
 		case PARTS_TYPE_SHAPE:
@@ -106,12 +110,36 @@ public class GuiPartsHandler {
 		 * <pre>
 		 * 引数で指定した座標で初期化します
 		 * </pre>
-		 * @param ix x座標の初期化値
-		 * @param iy y座標の初期化値
+		 * @param ax x座標の初期化値
+		 * @param ay y座標の初期化値
 		 */
-		public Pos(int ix, int iy){
-			x = ix;
-			y = iy;
+		public Pos(int ax, int ay){
+			x = ax;
+			y = ay;
+		}
+	}
+	
+	/**
+	 * パーツのレイアウト情報を保存する構造体
+	 * @author marusa
+	 */
+	public static class LayoutParams{
+		public int x = 0;
+		public int y = 0;
+
+		public int width = 45;
+		public int height = 96;
+		
+		public LayoutParams(int ax, int ay){
+			x = ax;
+			y = ay;
+		}
+		
+		public LayoutParams(int ax, int ay, int aWidth, int aHeight){
+			x = ax;
+			y = ay;
+			width = aWidth;
+			height = aHeight;
 		}
 	}
 	
