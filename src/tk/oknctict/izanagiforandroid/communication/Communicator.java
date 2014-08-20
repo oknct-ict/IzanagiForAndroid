@@ -2,6 +2,7 @@ package tk.oknctict.izanagiforandroid.communication;
 
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
+import java.util.UUID;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,7 +59,7 @@ public class Communicator {
 		dataObject.put("user_id", userId);
 		dataObject.put("password", passwd);
 		
-		JSONObject rootObject = generatePacket("", "login_REQ", dataObject);
+		JSONObject rootObject = generatePacket("", "login", dataObject);
 		
 		/* データの送信 */
 		wsHandler.sendMessage(rootObject.toString());
@@ -96,7 +97,7 @@ public class Communicator {
 		dataObject.put("address", email);
 		dataObject.put("grade", (schoolId * 10 + grade));
 		
-		JSONObject rootObject = generatePacket("", "register_REQ", dataObject);
+		JSONObject rootObject = generatePacket("", "register", dataObject);
 		
 		/* データの送信 */
 		wsHandler.sendMessage(rootObject.toString());
@@ -120,6 +121,7 @@ public class Communicator {
 		packet.put("session_id", sessionId);
 		packet.put("command", command);
 		packet.put("data", data);
+		packet.put("request_id", UUID.randomUUID().hashCode());
 		
 		return (packet);
 	}
