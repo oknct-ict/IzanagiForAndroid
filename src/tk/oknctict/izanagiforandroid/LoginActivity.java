@@ -1,6 +1,7 @@
 package tk.oknctict.izanagiforandroid;
 
 import java.net.URISyntaxException;
+import java.nio.channels.NotYetConnectedException;
 
 import org.json.JSONException;
 
@@ -37,8 +38,14 @@ public class LoginActivity extends Activity {
 					communicator.establishConnection();
 					try {
 						communicator.login(username, passwd);
+					} catch (NotYetConnectedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					} catch (JSONException e) {
-						// TODO エラーが発生したのでアクティビティーを終了する
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} catch (URISyntaxException e) {

@@ -48,10 +48,11 @@ public class Communicator {
 	 * サーバへログインする
 	 * @param userId ログインしたいユーザのID
 	 * @param passwd ログインしたいユーザのパスワード
-	 * @return 成功なら0,失敗ならエラーコード
 	 * @throws JSONException 
+	 * @throws InterruptedException 
+	 * @throws NotYetConnectedException 
 	 */
-	public int login(String userId, String passwd) throws JSONException {
+	public void login(String userId, String passwd) throws JSONException, NotYetConnectedException, InterruptedException {
 		/* JSONObjectの生成 */
 		JSONObject dataObject = new JSONObject();
 		dataObject.put("user_id", userId);
@@ -60,17 +61,7 @@ public class Communicator {
 		JSONObject rootObject = generatePacket("", "login_REQ", dataObject);
 		
 		/* データの送信 */
-		try {
-			wsHandler.sendMessage(rootObject.toString());
-		} catch (NotYetConnectedException e) {
-			e.printStackTrace();
-			return (ERROR_NOT_YET_CONNECTED);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return (ERROR_INTERUPTED);
-		}
-		
-		return (0);
+		wsHandler.sendMessage(rootObject.toString());
 	}
 	public static final int ERROR_CANNOT_USE_SHA1 = 1;
 	public static final int ERROR_CANNOT_GENERATE_JSON = 2;
