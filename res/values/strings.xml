@@ -9,7 +9,7 @@
     <string name="login_password">パスワード</string>
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
-    <string name="login_login_button">ログイン</string>
+    <string name="login_login_button_text">ログイン</string>
     <string name="login_signup_button">新規登録</string>
     
     <string name="newuser_newuser">新規ユーザ登録</string>
