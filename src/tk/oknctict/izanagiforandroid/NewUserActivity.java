@@ -49,12 +49,19 @@ public class NewUserActivity extends Activity {
 					return;
 				}
 				
+				/* それぞれの値の取得 */
+				String newUserIdStr = userId.getText().toString();
+				String newPasswdStr = passwd.getText().toString();
+				String newEmailStr = email.getText().toString();
+				int institutionId = institutionSpinner.getSelectedItemPosition();
+				int gradeNum = Integer.parseInt(grade.getText().toString());
+				
 				/* リクエスト処理 */
 				try {
 					Communicator communicator = new Communicator();
 					communicator.establishConnection();
 					try {
-						communicator.newUserRequest(userId.getText().toString(), passwd.getText().toString(), email.getText().toString(), institutionSpinner.getSelectedItemPosition(),  1);
+						communicator.newUserRequest(newUserIdStr, newPasswdStr, newEmailStr, institutionId, gradeNum);
 					} catch (NotYetConnectedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
