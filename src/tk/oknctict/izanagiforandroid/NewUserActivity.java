@@ -41,6 +41,8 @@ public class NewUserActivity extends Activity {
 				EditText passwd = (EditText)findViewById(R.id.newuser_password);
 				EditText passwdAgain = (EditText)findViewById(R.id.newuser_password_again);
 				EditText email = (EditText)findViewById(R.id.newuser_email);
+				Spinner institutionSpinner = (Spinner)findViewById(R.id.newuser_institution);
+				EditText grade = (EditText)findViewById(R.id.newuser_grade);
 				
 				if (passwd.getText().equals(passwdAgain.getText())){
 					// TODO: パスワードが再入力と一致しなかった場合、リジェクト
@@ -52,7 +54,7 @@ public class NewUserActivity extends Activity {
 					Communicator communicator = new Communicator();
 					communicator.establishConnection();
 					try {
-						communicator.newUserRequest(userId.getText().toString(), passwd.getText().toString(), email.getText().toString(), 1, 1);
+						communicator.newUserRequest(userId.getText().toString(), passwd.getText().toString(), email.getText().toString(), institutionSpinner.getSelectedItemPosition(),  1);
 					} catch (NotYetConnectedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
