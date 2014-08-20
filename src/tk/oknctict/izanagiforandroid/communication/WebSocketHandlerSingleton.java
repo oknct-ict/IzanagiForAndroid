@@ -56,7 +56,7 @@ public class WebSocketHandlerSingleton {
 	 * @param requestId リスンしたいリクエストIDを設定する
 	 * @param listener requestIdのメッセージの際に呼ばれるリスナ
 	 */
-	public void setOnMessageListener(int requestId, IWebSocketHandlerListener listener){
+	public void addOnMessageListener(int requestId, IWebSocketHandlerListener listener){
 		mOnClieckListener.put(requestId, listener);
 	}
 	
