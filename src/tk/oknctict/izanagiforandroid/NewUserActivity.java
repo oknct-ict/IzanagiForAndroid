@@ -53,7 +53,7 @@ public class NewUserActivity extends Activity {
 				String newUserIdStr = userId.getText().toString();
 				String newPasswdStr = passwd.getText().toString();
 				String newEmailStr = email.getText().toString();
-				int institutionId = institutionSpinner.getSelectedItemPosition();
+				int institutionId = institutionSpinner.getSelectedItemPosition() + 1;
 				int gradeNum = Integer.parseInt(grade.getText().toString());
 				
 				/* リクエスト処理 */
