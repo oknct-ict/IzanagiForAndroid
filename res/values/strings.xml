@@ -5,8 +5,28 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
+    <string name="login_username">ユーザID</string>
+    <string name="login_password">パスワード</string>
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
-    <string name="login_login_button_text">ログイン</string>
-
+    <string name="login_login_button">ログイン</string>
+    <string name="login_signup_button">新規登録</string>
+    
+    <string name="newuser_newuser">新規ユーザ登録</string>
+    <string name="newuser_username">希望するユーザID</string>
+    <string name="newuser_password">パスワード</string>
+    <string name="newuser_email">メールアドレス</string>
+    <string name="newuser_username_hint">Username</string>
+    <string name="newuser_password_hint">Password</string>
+    <string name="newuser_email_hint">E-mail</string>
+    <string name="newuser_signup_button">新規登録</string>
+    <string name="newuser_cansel_button">キャンセル</string>
+    
+    <string name="store_search_hint">search</string>
+    
+    <string name="listlayout_date">2014/8/18</string>
+    
+    <string name="menu_myapps">My Apps</string>
+    <string name="menu_dlapps">DL Apps</string>
+    <string name="menu_store">Store</string>
 </resources>
