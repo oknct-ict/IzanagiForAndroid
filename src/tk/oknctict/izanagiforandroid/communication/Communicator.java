@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import tk.oknctict.izanagiforandroid.Constants;
+import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton.IWebSocketHandlerListener;
 
@@ -67,10 +68,31 @@ public class Communicator {
 		/* データの送信 */
 		wsHandler.sendMessage(rootObject.toString());
 		
+		/*
+		 * loginはハンドシェイクも兼ねているので、
+		 * ログインリクエストのレスポンスに含まれるセッションIDが通信のための認証キーになってます
+		 */
 		wsHandler.addOnMessageListener(rootObject.getInt("request_id"), new IWebSocketHandlerListener() {
 			@Override
 			public void onMessage(String message) {
 				Log.d("WebSocketHandlerSingleton", message);
+				
+				//受け取ったJSONのパース
+				JSONObject obj = null;
+				try {
+					obj = new JSONObject(message);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				//セッションIDの保存
+				try {
+					SessionIdHolder.setSessionId(obj.getString("session_id"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			@Override

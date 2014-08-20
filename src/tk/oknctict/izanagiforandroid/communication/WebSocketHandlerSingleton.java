@@ -3,11 +3,13 @@ package tk.oknctict.izanagiforandroid.communication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
+
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import android.os.Build;
 import android.util.SparseArray;
 
@@ -156,6 +158,7 @@ public class WebSocketHandlerSingleton {
 			public void onClose(int code, String reason, boolean remote){
 				mListener.onClose(code, reason, remote);
 				WebSocketHandlerSingleton.delConnection();
+				SessionIdHolder.delSessionId();
 			}
 		};
 		
