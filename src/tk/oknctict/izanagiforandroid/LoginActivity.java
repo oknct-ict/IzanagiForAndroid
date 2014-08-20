@@ -25,7 +25,7 @@ public class LoginActivity extends Activity {
 				Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
 				
 				EditText usernameBox = (EditText)findViewById(R.id.login_username);
-				EditText passwdBox = (EditText)findViewById(R.id.login_passwd);
+				EditText passwdBox = (EditText)findViewById(R.id.login_password);
 				
 				String username = usernameBox.getText().toString();
 				String passwd = passwdBox.getText().toString();
