@@ -3,11 +3,15 @@ package tk.oknctict.izanagiforandroid.communication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
+import java.util.HashMap;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Build;
+import android.util.SparseArray;
 
 /**
  * Websocketをハンドルするシングルトンクラス
@@ -22,6 +26,8 @@ public class WebSocketHandlerSingleton {
 	private static WebSocketClient mClient = null;
 	
 	private IWebSocketHandlerListener mListener = new EmptyListener();
+	
+	private static SparseArray<IWebSocketHandlerListener> mOnClieckListener = new SparseArray<WebSocketHandlerSingleton.IWebSocketHandlerListener>();
 	
 	/**
 	 * インスタンスの取得
@@ -88,6 +94,9 @@ public class WebSocketHandlerSingleton {
 			java.lang.System.setProperty("java.net.preferIPv4Stack", "true");
 		}
 		
+		/*
+		 * 接続の確立と共に、イベントリスナの設定もおこないます 
+		 */
 		mClient = new WebSocketClient(mUri){
 			@Override
 			public void onOpen(ServerHandshake handshake){
@@ -97,6 +106,27 @@ public class WebSocketHandlerSingleton {
 			@Override
 			public void onMessage(final String message){
 				mListener.onMessage(message);
+				
+				try {
+					JSONObject obj = new JSONObject(message);
+					
+					/*
+					 * PUSHコマンドなら処理をする。
+					 * そうでなければrequestIdでListenerを呼ぶ
+					 */
+					String command = obj.getString("command");
+					if (command == "run_start"){
+						
+					}
+					else {
+						int requestId = obj.getInt("request_id");
+						IWebSocketHandlerListener listener = mOnClieckListener.get(requestId);
+						listener.onMessage(message);
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			@Override
