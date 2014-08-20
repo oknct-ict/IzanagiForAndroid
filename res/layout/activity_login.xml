@@ -7,27 +7,26 @@
     <View 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.05"/>
     
     <ImageView 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"
-        android:src="@drawable/logo"
-        />
-    
+        android:layout_weight="0.3"
+        android:src="@drawable/logo" />   
     <View 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.05"/>
-    
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
+
+    <LinearLayout
+        android:id="@+id/login_LayoutLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        >
+        android:layout_gravity="center" >
+        <!-- 入力スペース -->
         <EditText
             android:id="@+id/login_username"
             android:layout_width="240dp"
@@ -35,12 +34,10 @@
             android:ems="10"
             android:hint="@string/login_username_hint"
             android:layout_gravity="center">
-
             <requestFocus />
         </EditText>
-        
         <EditText
-	        android:id="@+id/login_passwd"
+	        android:id="@+id/login_password"
 	        android:layout_width="240dp"
 	        android:layout_height="40dp"
 	        android:ems="10"
@@ -48,19 +45,48 @@
 	        android:hint="@string/login_password_hint"
 	        android:layout_gravity="center">
 	    </EditText>
-	    
-        <Button
-            android:id="@+id/login_login_button"
-            android:layout_width="230dp"
+	    <Button
+	        android:id="@+id/login_login_button"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:text="@string/login_login_button_text"
-            android:layout_gravity="center" />
+            android:text="@string/login_login_button"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_login"
+            android:textColor="@color/login_loginbotton_string" />
     </LinearLayout>
-    
-    
-
     <View 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"/>
+        android:layout_weight="0.05"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@color/login_newuserArea_background" >
+    	<TextView
+    	    android:id="@+id/newuser_text_newuser"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:padding="5dp"
+        	android:layout_gravity="center"
+        	android:text="@string/login_newuser_canvassing"
+        	android:textSize="15sp" />
+    	<Button
+        	android:id="@+id/login_newuser_button"
+        	android:layout_width="240dp"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="center"
+        	android:layout_margin="5dp"
+        	android:text="@string/login_signup_button"
+        	android:background="@drawable/button_default" />
+    </LinearLayout>       
+
 </LinearLayout>

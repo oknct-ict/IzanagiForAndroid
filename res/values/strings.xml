@@ -5,12 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
-    <string name="login_username">ユーザID</string>
-    <string name="login_password">パスワード</string>
-    <string name="login_username_hint">Username</string>
-    <string name="login_password_hint">Password</string>
-    <string name="login_login_button_text">ログイン</string>
+    <string name="login_username_hint">ユーザID</string>
+    <string name="login_password_hint">パスワード</string>
+    <string name="login_login_button">ログイン</string>
     <string name="login_signup_button">新規登録</string>
+    <string name="login_newuser_canvassing">IzanagiユーザIDをお持ちでない場合</string>
     
     <string name="newuser_newuser">新規ユーザ登録</string>
     <string name="newuser_username">希望するユーザID</string>
