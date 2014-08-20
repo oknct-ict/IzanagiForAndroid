@@ -12,7 +12,7 @@
     <ImageView 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"
+        android:layout_weight="0.3"
         android:src="@drawable/logo" />   
     <View 
         android:layout_width="fill_parent"
@@ -59,7 +59,19 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.05"/>
-    <TextView
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@color/login_newuserArea_background" >
+    	<TextView
     	    android:id="@+id/newuser_text_newuser"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
@@ -67,16 +79,14 @@
         	android:layout_gravity="center"
         	android:text="@string/login_newuser_canvassing"
         	android:textSize="15sp" />
-    <Button
-        android:id="@+id/login_newuser_button"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:text="@string/login_signup_button"
-        android:background="@drawable/button_default" />       
-    <View 
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"/>
+    	<Button
+        	android:id="@+id/login_newuser_button"
+        	android:layout_width="240dp"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="center"
+        	android:layout_margin="5dp"
+        	android:text="@string/login_signup_button"
+        	android:background="@drawable/button_default" />
+    </LinearLayout>       
+
 </LinearLayout>
