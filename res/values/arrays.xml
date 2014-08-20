@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="newuser_institution_array">  
+  		<item>小学校</item>  
+  		<item>中学校</item>  
+  		<item>高校</item>
+  		<item>大学</item>
+  		<item>大学院</item>
+  		<item>高専</item>
+  		<item>専門学校</item>
+  		<item>その他</item>  
+	</string-array> 
+</resources>
