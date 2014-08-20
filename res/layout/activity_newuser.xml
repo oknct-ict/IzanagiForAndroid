@@ -85,6 +85,24 @@
 	        android:hint="@string/newuser_password_hint"
 	        >
 	    </EditText>
+	    <TextView
+            android:id="@+id/newuser_text_password_again"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingTop="5dp"
+        	android:text="@string/newuser_password_again"
+        	
+        	 />
+        <EditText
+	        android:id="@+id/newuser_password_again"
+	        android:layout_width="240dp"
+	        android:layout_height="40dp"
+	        android:layout_gravity="center"
+	        android:ems="10"
+	        android:inputType="textPassword"
+	        android:hint="@string/newuser_password_hint"
+	        >
+	    </EditText>
         <TextView
             android:id="@+id/newuser_text_email"
         	android:layout_width="wrap_content"
@@ -113,20 +131,22 @@
         android:layout_gravity="center"
         >
         <Button
+            android:id="@+id/newuser_cancel_button"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/newuser_cansel_button"
+            android:text="@string/newuser_cansel_button_text"
             android:background="@drawable/button_default" />
         <View 
         	android:layout_width="10dp"
         	android:layout_height="0dp"
         	android:layout_gravity="center"/>
         <Button
+            android:id="@+id/newuser_signup_button"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/newuser_signup_button"
+            android:text="@string/newuser_signup_button_text"
             android:background="@drawable/button_default" />
 
     </LinearLayout>
