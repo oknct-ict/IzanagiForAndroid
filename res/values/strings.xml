@@ -16,11 +16,15 @@
     <string name="newuser_password">パスワード</string>
     <string name="newuser_password_again">パスワード(再入力)</string>
     <string name="newuser_email">メールアドレス</string>
+    <string name="newuser_institution_grade">所属機関</string>
+    <string name="newuser_institution">機関</string>
+    <string name="newuser_grade">学年</string>    
     <string name="newuser_username_hint">Username</string>
     <string name="newuser_password_hint">Password</string>
     <string name="newuser_email_hint">E-mail</string>
+    <string name="newuser_grade_hint">1</string>
     <string name="newuser_signup_button_text">新規登録</string>
-    <string name="newuser_cansel_button_text">キャンセル</string>
+    <string name="newuser_cansel_button_text">キャンセル</string> 
     
     <string name="store_search_hint">search</string>
     
