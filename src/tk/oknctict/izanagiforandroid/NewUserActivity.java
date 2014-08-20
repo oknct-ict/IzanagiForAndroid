@@ -42,6 +42,7 @@ public class NewUserActivity extends Activity {
 				/* リクエスト処理 */
 				try {
 					Communicator communicator = new Communicator();
+					communicator.establishConnection();
 					try {
 						communicator.newUserRequest(userId.getText().toString(), passwd.getText().toString(), email.getText().toString(), 1, 1);
 					} catch (NotYetConnectedException e) {

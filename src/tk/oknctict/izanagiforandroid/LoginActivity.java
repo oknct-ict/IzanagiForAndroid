@@ -8,8 +8,10 @@ import org.json.JSONException;
 import tk.oknctict.izanagiforandroid.R.id;
 import tk.oknctict.izanagiforandroid.communication.Communicator;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,6 +54,15 @@ public class LoginActivity extends Activity {
 					e.printStackTrace();
 				}
 				
+			}
+		});
+		
+		Button registarButton = (Button)findViewById(R.id.login_newuser_button);
+		registarButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplication(), NewUserActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
