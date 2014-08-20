@@ -13,8 +13,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class NewUserActivity extends Activity {
 	@Override
@@ -24,6 +26,12 @@ public class NewUserActivity extends Activity {
 		/* レイアウト */
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示
 		setContentView(R.layout.activity_newuser);
+		
+		/* ドロップダウンリストのコンテンツの設定 */
+		Spinner institutionSpinner = (Spinner)findViewById(R.id.newuser_institution);
+		ArrayAdapter<CharSequence> institutionsAdapter = ArrayAdapter.createFromResource(this, R.array.newuser_institution_array, android.R.layout.simple_spinner_item);
+		institutionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		institutionSpinner.setAdapter(institutionsAdapter);
 		
 		Button signupButton = (Button)findViewById(R.id.newuser_signup_button);
 		signupButton.setOnClickListener(new OnClickListener() {
