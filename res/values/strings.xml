@@ -15,12 +15,13 @@
     <string name="newuser_newuser">新規ユーザ登録</string>
     <string name="newuser_username">希望するユーザID</string>
     <string name="newuser_password">パスワード</string>
+    <string name="newuser_password_again">パスワード(再入力)</string>
     <string name="newuser_email">メールアドレス</string>
     <string name="newuser_username_hint">Username</string>
     <string name="newuser_password_hint">Password</string>
     <string name="newuser_email_hint">E-mail</string>
-    <string name="newuser_signup_button">新規登録</string>
-    <string name="newuser_cansel_button">キャンセル</string>
+    <string name="newuser_signup_button_text">新規登録</string>
+    <string name="newuser_cansel_button_text">キャンセル</string>
     
     <string name="store_search_hint">search</string>
     
