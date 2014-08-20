@@ -2,6 +2,8 @@ package tk.oknctict.izanagiforandroid;
 
 import java.net.URISyntaxException;
 
+import org.json.JSONException;
+
 import tk.oknctict.izanagiforandroid.R.id;
 import tk.oknctict.izanagiforandroid.communication.Communicator;
 import android.app.Activity;
@@ -33,7 +35,12 @@ public class LoginActivity extends Activity {
 				try {
 					Communicator communicator = new Communicator();
 					communicator.establishConnection();
-					communicator.login(username, passwd);
+					try {
+						communicator.login(username, passwd);
+					} catch (JSONException e) {
+						// TODO エラーが発生したのでアクティビティーを終了する
+						e.printStackTrace();
+					}
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
 				}
