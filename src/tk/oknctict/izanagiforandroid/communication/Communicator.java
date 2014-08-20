@@ -2,6 +2,7 @@ package tk.oknctict.izanagiforandroid.communication;
 
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,40 +48,96 @@ public class Communicator {
 	 * サーバへログインする
 	 * @param userId ログインしたいユーザのID
 	 * @param passwd ログインしたいユーザのパスワード
-	 * @return 成功なら0,失敗ならエラーコード
+	 * @throws JSONException 
+	 * @throws InterruptedException 
+	 * @throws NotYetConnectedException 
 	 */
-	public int login(String userId, String passwd){
+	public void login(String userId, String passwd) throws JSONException, NotYetConnectedException, InterruptedException {
 		/* JSONObjectの生成 */
-		JSONObject rootObject = new JSONObject();
 		JSONObject dataObject = new JSONObject();
-		try {
-			dataObject.put("user_id", userId);
-			dataObject.put("password", passwd);
-			
-			rootObject.put("type", "android");
-			rootObject.put("session_id", "");
-			rootObject.put("command", "login_REQ");
-			rootObject.put("data", dataObject);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return (ERROR_CANNOT_GENERATE_JSON);
-		}
+		dataObject.put("user_id", userId);
+		dataObject.put("password", passwd);
+		
+		JSONObject rootObject = generatePacket("", "login_REQ", dataObject);
 		
 		/* データの送信 */
-		try {
-			wsHandler.sendMessage(rootObject.toString());
-		} catch (NotYetConnectedException e) {
-			e.printStackTrace();
-			return (ERROR_NOT_YET_CONNECTED);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return (ERROR_INTERUPTED);
-		}
-		
-		return (0);
+		wsHandler.sendMessage(rootObject.toString());
 	}
 	public static final int ERROR_CANNOT_USE_SHA1 = 1;
 	public static final int ERROR_CANNOT_GENERATE_JSON = 2;
 	public static final int ERROR_NOT_YET_CONNECTED = 3;
 	public static final int ERROR_INTERUPTED = 4;
+	
+	/**
+	 * ユーザの新規登録リクエスト
+	 * @param newUserId
+	 * @param newUserPasswd
+	 * @param email
+	 * @param schoolId
+	 * @param grade
+	 * @throws IllegalSchoolIdException
+	 * @throws IllegalGradeException
+	 * @throws JSONException
+	 * @throws NotYetConnectedException
+	 * @throws InterruptedException
+	 */
+	public void newUserRequest(String newUserId, String newUserPasswd, String email, int schoolId, int grade) throws IllegalSchoolIdException, IllegalGradeException, JSONException, NotYetConnectedException, InterruptedException{
+		if (schoolId < 1 || SCHOOL_ID_OTHER < schoolId){
+			throw new IllegalSchoolIdException();
+		}
+		if (grade < 1 || 9 < schoolId){
+			throw new IllegalGradeException();
+		}
+		
+		/* JSONObjectの生成 */
+		JSONObject dataObject = new JSONObject();
+		dataObject.put("user_id", newUserId);
+		dataObject.put("password", newUserPasswd);
+		dataObject.put("address", email);
+		dataObject.put("grade", (schoolId * 10 + grade));
+		
+		JSONObject rootObject = generatePacket("", "register_REQ", dataObject);
+		
+		/* データの送信 */
+		wsHandler.sendMessage(rootObject.toString());
+	}
+	public static final int SCHOOL_ID_JUNEAR = 1;
+	public static final int SCHOOL_ID_JUNEAR_HIGE = 2;
+	public static final int SCHOOL_ID_HIGE = 3;
+	public static final int SCHOOL_ID_UNIV = 4;
+	public static final int SCHOOL_ID_GRAD = 5;
+	public static final int SCHOOL_ID_NCT = 6;
+	public static final int SCHOOL_ID_COLLAGE = 7;
+	public static final int SCHOOL_ID_OTHER = 8;
+	
+	
+	/* private */
+	private JSONObject generatePacket(String sessionId, String command, JSONObject data) throws JSONException{
+		/* JSONObjectの生成 */
+		JSONObject packet = new JSONObject();
+		
+		packet.put("type", "android");
+		packet.put("session_id", sessionId);
+		packet.put("command", command);
+		packet.put("data", data);
+		
+		return (packet);
+	}
+	
+	/* exceptions */
+	public class IllegalSchoolIdException extends Exception {
+		public IllegalSchoolIdException() {
+			super("Undefined school id.");
+		}
+		
+		private static final long serialVersionUID = 6567553179418687742L;
+	}
+
+	public class IllegalGradeException extends Exception {
+		public IllegalGradeException() {
+			super("Illegal num of grade.");
+		}
+		
+		private static final long serialVersionUID = -5634065383444357157L;		
+	}
 }
