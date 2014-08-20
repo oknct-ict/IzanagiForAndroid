@@ -20,6 +20,7 @@ public class GuiPartsHandler {
 	private View mView;
 	private int mPartsType;
 	private LayoutParams mLayoutParams;
+	private String myText = "";
 	private RelativeLayout canvas; //描画先のレイアウト
 	
 	/**
@@ -101,6 +102,45 @@ public class GuiPartsHandler {
 		return (mLayoutParams);
 	}
 	
+	/**
+	 * テキストを設定します
+	 * <pre>
+	 * テキスト設計が無効なパーツに設定した場合、何も起こりません。
+	 * </pre>
+	 * @param text 設定するテキスト
+	 */
+	public void setText(String text){
+		myText = text;
+		
+		switch (mPartsType){
+		case PARTS_TYPE_BUTTON:
+			((Button)mView).setText(myText);
+			break;
+			
+		case PARTS_TYPE_TEXTVIEW:
+			((TextView)mView).setText(myText);
+			break;
+			
+		case PARTS_TYPE_EDITTEXT:
+		case PARTS_TYPE_SHAPE:
+		case PARTS_TYPE_IMAGEVIEW:
+			// Nothing to do.
+			break;
+		}
+	}
+	
+	/**
+	 * 設定されたテキストのゲッタ
+	 * @return 設定されたテキスト
+	 */
+	public String getText(){
+		if (mPartsType == PARTS_TYPE_EDITTEXT){
+			return ((EditText)mView).getText().toString();
+		}
+		else {
+			return (myText);
+		}
+	}
 	
 	/* private */
 	private void setLayoutParams2View(){
