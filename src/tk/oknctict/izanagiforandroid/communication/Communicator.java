@@ -63,6 +63,10 @@ public class Communicator {
 		dataObject.put("user_id", userId);
 		dataObject.put("password", passwd);
 		
+		JSONObject deviceData = new JSONObject();
+		deviceData.put("device_id", android.os.Build.ID);
+		dataObject.put("device_data", deviceData);
+		
 		JSONObject rootObject = generatePacket("", "login", dataObject);
 		
 		/* データの送信 */
