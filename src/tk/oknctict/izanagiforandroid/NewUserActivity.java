@@ -75,5 +75,14 @@ public class NewUserActivity extends Activity {
 				}
 			}
 		});
+		
+		/* キャンセルボタン */
+		Button canceleButton = (Button)findViewById(R.id.newuser_cancel_button);
+		canceleButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				NewUserActivity.this.finish();
+			}
+		});
 	}
 }
