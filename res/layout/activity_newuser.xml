@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"/>
+    <LinearLayout
+    	android:layout_width="wrap_content"
+    	android:layout_height="0dp"
+    	android:layout_weight="0.35"
+    	android:orientation="horizontal"
+    	android:gravity="center_vertical"
+    	android:layout_gravity="center" >
+    	<ImageView 
+        	android:layout_width="150dp"
+        	android:layout_height="150dp"	
+        	android:src="@drawable/logo"
+        	 />
+    	<TextView
+    	    android:id="@+id/newuser_text_newuser"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:padding="5dp"
+        	android:text="@string/newuser_newuser"
+        	android:textSize="20sp" />
+    </LinearLayout>
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.02"/>   
+    <!-- 入力スペース -->
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.45"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/newuser_text_username"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/newuser_username"
+        	 />
+        <EditText
+            android:id="@+id/newuser_username"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="@string/newuser_username_hint"
+            >
+
+            <requestFocus />
+        </EditText>
+        
+        <TextView
+            android:id="@+id/newuser_text_password"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingTop="5dp"
+        	android:text="@string/newuser_password"
+        	
+        	 />
+        <EditText
+	        android:id="@+id/newuser_password"
+	        android:layout_width="240dp"
+	        android:layout_height="40dp"
+	        android:layout_gravity="center"
+	        android:ems="10"
+	        android:inputType="textPassword"
+	        android:hint="@string/newuser_password_hint"
+	        >
+	    </EditText>
+        <TextView
+            android:id="@+id/newuser_text_email"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/newuser_email"
+        	android:paddingTop="5dp" />	    
+        <EditText
+	        android:id="@+id/newuser_email"
+	        android:layout_width="240dp"
+	        android:layout_height="40dp"
+	        android:layout_gravity="center"
+	        android:ems="10"
+	        android:inputType="textEmailAddress"
+	        android:hint="@string/newuser_email_hint"
+	        >
+	    </EditText>
+	</LinearLayout>
+	</ScrollView>
+	</LinearLayout> 
+	<LinearLayout 
+	    android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/newuser_cansel_button"
+            android:background="@drawable/button_default" />
+        <View 
+        	android:layout_width="10dp"
+        	android:layout_height="0dp"
+        	android:layout_gravity="center"/>
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/newuser_signup_button"
+            android:background="@drawable/button_default" />
+
+    </LinearLayout>
+    
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.04"/>
+</LinearLayout>
