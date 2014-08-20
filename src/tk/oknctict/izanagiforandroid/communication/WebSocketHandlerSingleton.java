@@ -3,8 +3,6 @@ package tk.oknctict.izanagiforandroid.communication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
-import java.util.HashMap;
-
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
@@ -48,6 +46,26 @@ public class WebSocketHandlerSingleton {
 		else {
 			return (true);
 		}
+	}
+	
+	/**
+	 * リクエストIDに対応したメッセージリスナを設定します
+	 * <pre>
+	 * IWebSocketHandlerListenerを指定しますがonMessageしか呼ばれません
+	 * </pre>
+	 * @param requestId リスンしたいリクエストIDを設定する
+	 * @param listener requestIdのメッセージの際に呼ばれるリスナ
+	 */
+	public void setOnMessageListener(int requestId, IWebSocketHandlerListener listener){
+		mOnClieckListener.put(requestId, listener);
+	}
+	
+	/**
+	 * リクエストIDのリスナを削除します
+	 * @param requestId 削除するリスナに対応するリクエストID
+	 */
+	public void delOnMessageListener(int requestId){
+		mOnClieckListener.delete(requestId);
 	}
 	
 	/**
