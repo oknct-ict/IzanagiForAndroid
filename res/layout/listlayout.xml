@@ -16,7 +16,7 @@
 	<!-- ファイル画像 -->
     <ImageView
 	    android:id="@+id/listlayout_listImage"
-	    android:padding="15dp"
+	    android:padding="10dp"
 		android:layout_width="80dp"
 	    android:layout_height="80dp"
 	    
@@ -35,7 +35,7 @@
   		android:id="@+id/listlayout_textview1"
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
-  		android:textSize="30sp"
+  		android:textSize="25sp"
   		android:paddingTop="5dp"
   		android:paddingRight="3dp"
   		android:paddingBottom="3dp"
@@ -48,7 +48,7 @@
   		android:id="@+id/listlayout_textview2"
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
-  		android:textSize="20sp"
+  		android:textSize="12sp"
   		android:paddingTop="3dp"
   		android:paddingRight="15dp"
   		android:paddingBottom="3dp"
