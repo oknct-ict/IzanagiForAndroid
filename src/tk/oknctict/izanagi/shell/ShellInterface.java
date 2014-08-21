@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import tk.oknctict.izanagi.variable.*;
 import tk.oknctict.izanagi.shell.*;
 import tk.oknctict.izanagi.parser.*;
+import tk.oknctict.izanagiforandroid.IzanagiExecuteActivity;
 import tk.oknctict.izanagiforandroid.guimanager.GuiManagerSingleton;
 import tk.oknctict.izanagiforandroid.guimanager.GuiManagerSingleton.PartsIdNotfoundException;
 import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
@@ -83,8 +84,9 @@ public class ShellInterface
 	public void createView(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = makeLayoutParams(view);
+		LayoutParams params = makeLayoutParams(view);
 		
+		IzanagiExecuteActivity.addView(viewId, view.getType(), params);
 //		mGuiManager.addGuiParts(viewId, view.getType(), layout);
 	}
 	public void updateView(IzaView view)
@@ -155,8 +157,10 @@ public class ShellInterface
 		
 		x = (int)view.getX();
 		y = (int)view.getY();
-		width  = (int)view.getWidth();
-		height = (int)view.getHeight();
+//		width  = (int)view.getWidth();
+//		height = (int)view.getHeight();
+		width = 200;
+		height = 100;
 		LayoutParams layout = new LayoutParams(x, y, width, height);
 		
 		return (layout);
