@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
+	public static LoginActivity instance = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		instance = this; // TODO: インスタンスが存在しない場合不安ですね・・・
 		
 		/* タイトル */
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示
