@@ -10,10 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tk.oknctict.izanagiforandroid.NoConnectionActivity;
+import tk.oknctict.izanagiforandroid.ServiceHelper;
 import tk.oknctict.izanagiforandroid.SessionIdHolder;
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.SparseArray;
@@ -22,7 +20,7 @@ import android.util.SparseArray;
  * Websocketをハンドルするシングルトンクラス
  * @author marusa
  */
-public class WebSocketHandlerSingleton {
+public class WebSocketHandlerSingleton{
 	/* for singleton */
 	private static WebSocketHandlerSingleton mInstance = new WebSocketHandlerSingleton();
 	private WebSocketHandlerSingleton() {}
@@ -165,9 +163,11 @@ public class WebSocketHandlerSingleton {
 				WebSocketHandlerSingleton.delConnection();
 				SessionIdHolder.delSessionId();
 				
-				//Intent intent = new Intent(Activity.getApplication(), NoConnectionActivity.class);
-			    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			    //startActivity(intent);
+				/* 全てのタスクをKillして最初からやり直す */
+				ServiceHelper helper = new ServiceHelper();
+				Intent intent = new Intent(helper.getApplication(), NoConnectionActivity.class);
+			    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			    helper.startActivity(intent);
 			}
 		};
 		
