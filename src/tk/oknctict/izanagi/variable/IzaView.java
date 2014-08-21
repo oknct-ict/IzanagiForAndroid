@@ -1,18 +1,134 @@
 package tk.oknctict.izanagi.variable;
 
-public class IzaNone implements IzaBasic
-{
-	public int mType;
+import java.util.ArrayList;
+import tk.oknctict.izanagi.variable.*;
+import tk.oknctict.izanagi.shell.*;
 
-	public IzaNone()
+public abstract class  IzaView implements IzaBasic
+{
+	protected ShellInterface mShellInterface;
+	protected int mType;
+	private float mX, mY;
+	private float mWidth, mHeight;
+	private String mText;
+
+	private IzaEvent onClick;
+
+	public int getType()
 	{
-		mType = TYPE_NONE;
+		return (mType);
 	}
+
+	public void setEvent(IzaEvent event)
+	{
+		int eventType = event.getEventType();
+
+		switch (eventType){
+			case IzaEvent.EVENT_CLICK:
+				setClickEvent(event);
+				break;
+		}
+	}
+	public IzaEvent getClickEvent()
+	{
+		return (onClick);
+	}
+	public void setClickEvent(IzaEvent event)
+	{
+		onClick = new IzaEvent(event);
+	}
+
+	public float getX()
+	{
+		return (mX);
+	}
+	public void setX(float x)
+	{
+		mX = x;
+		mShellInterface.updateView(this);
+	}
+
+	public float getY()
+	{
+		return (mY);
+	}
+	public void setY(float y)
+	{
+		mY = y;
+		mShellInterface.updateView(this);
+	}
+
+	public float getWidth()
+	{
+		return (mWidth);
+	}
+	public void setWidth(float width)
+	{
+		mWidth = width;
+		mShellInterface.updateView(this);
+	}
+
+	public float getHeight()
+	{
+		return (mHeight);
+	}
+	public void setHeight(float height)
+	{
+		mHeight = height;
+		mShellInterface.updateView(this);
+	}
+
+	public String getText()
+	{
+		return (mText);
+	}
+	public void setText(String text)
+	{
+		mText = text;
+		mShellInterface.updateView(this);
+	}
+
+	public String toString()
+	{
+		return (String.format("type = %d, x = %f, y = %f, width = %f, height = %f", mType, mX, mY, mWidth, mHeight));
+	}
+
+
+	public abstract IzaBasic cast(int type);
+	public abstract IzaBasic clone();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public void set(IzaBasic value)
 	{
 	}
-
 	public IzaBasic add(IzaBasic right)
 	{
 		System.out.println("許されない演算です");
@@ -58,7 +174,6 @@ public class IzaNone implements IzaBasic
 		System.out.println("許されない演算です");
 		return (null);
 	}
-
 	public IzaBoolean EQ(IzaBasic right)
 	{
 		System.out.println("許されない演算です");
@@ -99,112 +214,14 @@ public class IzaNone implements IzaBasic
 		System.out.println("許されない演算です");
 		return (null);
 	}
-
 	public IzaBasic minus()
 	{
 		System.out.println("許されない演算です");
 		return (null);
 	}
-
 	public IzaBasic subscript(String index)
 	{
 		System.out.println("許されない演算です");
 		return (null);
-	}
-
-	public IzaBasic cast(int type)
-	{
-		IzaBasic result;
-		switch (type){
-			case TYPE_INTEGER:
-				result = toIzaInteger();
-				break;
-			
-			case TYPE_FLOAT:
-				result = toIzaFloat();
-				break;
-
-			case TYPE_STRING:
-				result = toIzaString();
-				break;
-
-			case TYPE_ARRAY:
-				result = toIzaArray();
-				break;
-
-			case TYPE_BUTTON:
-				result = toIzaButton();
-				break;
-
-			case TYPE_TEXTVIEW:
-				result = toIzaTextView();
-				break;
-
-			case TYPE_EDITTEXT:
-				result = toIzaEditText();
-				break;
-
-			default:
-				System.out.println("許されないキャストです");
-				return (null);
-		}
-		
-		return (result);
-	}
-
-	public IzaBasic toIzaInteger()
-	{
-		IzaInteger value = new IzaInteger();
-		return (value);
-	}
-	public IzaBasic toIzaFloat()
-	{
-		IzaFloat value = new IzaFloat();
-		return (value);
-	}
-	public IzaBasic toIzaString()
-	{
-		IzaString value = new IzaString();
-		return (value);
-	}
-	public IzaBasic toIzaBoolean()
-	{
-		IzaBoolean value = new IzaBoolean();
-		return (value);
-	}
-	public IzaBasic toIzaArray()
-	{
-		IzaArray value = new IzaArray();
-		return (value);
-	}
-	public IzaBasic toIzaButton()
-	{
-		IzaButton value = new IzaButton();
-		return (value);
-	}
-	public IzaBasic toIzaTextView()
-	{
-		IzaTextView value = new IzaTextView();
-		return (value);
-	}
-	public IzaBasic toIzaEditText()
-	{
-		IzaEditText value = new IzaEditText();
-		return (value);
-	}
-
-	public int getType()
-	{
-		return (mType);
-	}
-
-	public IzaBasic clone()
-	{
-		return (new IzaNone());
-	}
-
-	public String toString()
-	{
-		return ("None");
 	}
 }

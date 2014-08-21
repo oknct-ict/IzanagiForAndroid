@@ -41,11 +41,13 @@ TOKEN:
 	|	<ENDSELECT: "End Select">
 	|	<DIM: "Dim">
 	|	<AS: "as">
+	|	<PARTS: "Parts">
+	|	<ON: "on">
 	|	<RETURN: "Return">
 	|	<BREAK: "Break">
 	|	<CONTINUE: "Continue">
 	|	<PRINT: "Print">
-	|	<TYPE: ("Integer" | "Float" | "String")>
+	|	<TYPE: ("Integer" | "Float" | "String" | "Button" | "TextView" | "EditText")>
 }
 TOKEN:
 {
@@ -77,7 +79,11 @@ TOKEN:
 	|	<RPAREN: ")">
 	|	<LBRACKET: "[">
 	|	<RBRACKET: "]">
+	|	<LBLOCK: "{">
+	|	<RBLOCK: "}">
 	|	<COMMA: ",">
+	|	<DOT: ".">
+	|	<SEMICOLON: ";">
 	|	<STR_START: "\""> : IN_STR
 	|   <INTEGER: (["0" - "9"])+>
 	|	<FLOAT: (["0" - "9"])+ "." (["0" - "9"])+>
@@ -150,7 +156,7 @@ void Stmts():
 {/*@bgen(jjtree) Stmts */
         try {
 /*@egen*/
-	(Stmt())+/*@bgen(jjtree)*/
+	(Stmt())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -182,7 +188,7 @@ void Block():
 {/*@bgen(jjtree) Block */
         try {
 /*@egen*/
-	(Stmt())+/*@bgen(jjtree)*/
+	(Stmt())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -214,7 +220,7 @@ void WhileBlock():
 {/*@bgen(jjtree) WhileBlock */
         try {
 /*@egen*/
-	(Stmt())+/*@bgen(jjtree)*/
+	(Stmt())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -246,7 +252,7 @@ void FuncBlock():
 {/*@bgen(jjtree) FuncBlock */
         try {
 /*@egen*/
-	(Stmt())+/*@bgen(jjtree)*/
+	(Stmt())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -350,16 +356,17 @@ void Stmt():
 {/*@bgen(jjtree) Stmt */
                 try {
 /*@egen*/
-		DefFunc()
-	|	IfStmt() 
-	|	WhileStmt()
-	|	SelectStmt()
-	|	DimStmt() 
-	|	BreakStmt()
-	|	ContinueStmt()
-	|	PrintStmt()
-	|	LOOKAHEAD(2) ReturnStmt()
-	|	LOOKAHEAD(2) CallFunc()
+		DefFunc()    
+	|	IfStmt()     
+	|	WhileStmt()  
+	|	SelectStmt() 
+	|	PartsStmt() 
+	|	DimStmt()    
+	|	BreakStmt()  
+	|	ContinueStmt() 
+	|	PrintStmt()    
+	|	LOOKAHEAD(2) ReturnStmt() 
+	|	LOOKAHEAD(2) CallFunc()   
 	|	LOOKAHEAD(2) Expression()/*@bgen(jjtree)*/
                 } catch (Throwable jjte000) {
                   if (jjtc000) {
@@ -541,6 +548,42 @@ void SelectStmt():
 		(<CASEELSE>  <COLON>
 			Block())?
 	<ENDSELECT>/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void PartsStmt():
+{/*@bgen(jjtree) PartsStmt */
+  ASTPartsStmt jjtn000 = new ASTPartsStmt(JJTPARTSSTMT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) PartsStmt */
+        try {
+/*@egen*/
+	<PARTS> Identifier() <LBLOCK>
+		(<FUNC> FuncName() <LPAREN> <RPAREN> <ON> Identifier() 
+			FuncBlock()
+		<ENDFUNC>)*
+	<RBLOCK>/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);

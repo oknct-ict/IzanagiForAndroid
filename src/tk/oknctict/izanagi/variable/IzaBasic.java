@@ -8,6 +8,11 @@ public interface IzaBasic
 	int TYPE_STRING = 3;
 	int TYPE_BOOLEAN = 4;
 	int TYPE_ARRAY = 5;
+	int TYPE_BUTTON = 6;
+	int TYPE_TEXTVIEW = 7;
+	int TYPE_EDITTEXT = 8;
+	int TYPE_IMAGEVIEW = 9;
+	int TYPE_SHAPE = 10;
 
 	public void set(IzaBasic value);
 	public IzaBasic add(IzaBasic right);

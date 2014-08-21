@@ -14,8 +14,8 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		/* ƒŒƒCƒAƒEƒg */
-		requestWindowFeature(Window.FEATURE_NO_TITLE); //ƒ^ƒCƒgƒ‹‚Ì”ñ•\¦
+		/* ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½g */
+		requestWindowFeature(Window.FEATURE_NO_TITLE); //ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½Ì”ï¿½\ï¿½ï¿½
 		setContentView(R.layout.activity_splash);
 		
 		try {
@@ -25,7 +25,7 @@ public class SplashActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		/* 3600ms‘Ò‹@ */
+		/* 3600msï¿½Ò‹@ */
 		Handler handler = new Handler();
 		handler.postDelayed(new splashHandler(), 3600);
 	}
@@ -34,9 +34,10 @@ public class SplashActivity extends Activity {
 		@Override
 		public void run() {
 			/* TODO:
-			 * ƒƒOƒCƒ“Ï‚İ‚©¯•Ê‚µ‚Ä‘JˆÚæ‚Ì•ÏX‚ğs‚¤
+			 * ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½Ï‚İ‚ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½Ä‘Jï¿½Úï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½
 			 */
-			Intent intent = new Intent(getApplication(), LoginActivity.class);
+			//Intent intent = new Intent(getApplication(), LoginActivity.class);
+			Intent intent = new Intent(getApplication(), IzanagiExecuteActivity.class);
 			startActivity(intent);
 			
 			SplashActivity.this.finish();

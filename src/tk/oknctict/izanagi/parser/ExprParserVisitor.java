@@ -17,6 +17,7 @@ public interface ExprParserVisitor
   public Object visit(ASTIfStmt node, Object data);
   public Object visit(ASTWhileStmt node, Object data);
   public Object visit(ASTSelectStmt node, Object data);
+  public Object visit(ASTPartsStmt node, Object data);
   public Object visit(ASTDimStmt node, Object data);
   public Object visit(ASTBreakStmt node, Object data);
   public Object visit(ASTContinueStmt node, Object data);
@@ -56,4 +57,4 @@ public interface ExprParserVisitor
   public Object visit(ASTFuncName node, Object data);
   public Object visit(ASTIdentifier node, Object data);
 }
-/* JavaCC - OriginalChecksum=19dfcd8b0e5372c8571b8a264cda701f (do not edit this line) */
+/* JavaCC - OriginalChecksum=21c75135abd247ffc0974a7a347acf2a (do not edit this line) */

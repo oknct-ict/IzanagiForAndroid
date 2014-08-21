@@ -39,8 +39,10 @@ public class ShellFuncs
 
 	public void dump()
 	{
+		System.out.println("[");
 		for (Map.Entry<String, ShellFunc> e : mFunc.entrySet()){
 			e.getValue().dump();
 		}
+		System.out.println("]");
 	}
 }

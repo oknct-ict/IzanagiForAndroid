@@ -10,7 +10,8 @@ public class ShellVisitor implements ExprParserVisitor
 {
 	private final ShellVarsManager mVarsMng;
 	private final ShellFuncs mFuncs;
-	private final Stack<String> mFuncsNameStack;
+	private final ShellInterface mInterface;
+	public static Stack<String> cFuncsNameStack;
 	private boolean mBreak;
 	private boolean mContinue;
 	private boolean mReturn;
@@ -22,7 +23,8 @@ public class ShellVisitor implements ExprParserVisitor
 	{
 		mVarsMng = ShellVarsManager.getInstance();
 		mFuncs = ShellFuncs.getInstance();
-		mFuncsNameStack = new Stack<String>();
+		mInterface = ShellInterface.getInstance();
+		cFuncsNameStack = new Stack<String>();
 		mBreak = false;
 		mContinue = false;
 		mReturn = false;
@@ -105,10 +107,10 @@ public class ShellVisitor implements ExprParserVisitor
 			}
 		}
 
-		String name = mFuncsNameStack.peek();
+		String name = cFuncsNameStack.peek();
 		int type = mFuncs.get(name).getType();
 
-		mFuncsNameStack.pop();
+		cFuncsNameStack.pop();
 		mVarsMng.outFunc();
 
 		if (mReturn == true){
@@ -151,12 +153,22 @@ public class ShellVisitor implements ExprParserVisitor
 			valueList.add(value);
 		}
 
+		cFuncsNameStack.push(name);
+		mVarsMng.intoFunc();
+		if (size >= 2){
+			IzaBasic returnValue;
+			returnValue = mInterface.callStdFunc(name, valueList);
+			if ((returnValue instanceof IzaNone) == false){
+				return (returnValue);
+			}
+		}
+
 		if (shellFunc.checkArgs(valueList) == false){
+			cFuncsNameStack.pop();
+			mVarsMng.outFunc();
 			return (null);
 		}
-		
-		mFuncsNameStack.push(name);
-		mVarsMng.intoFunc();
+
 		for (int i = 0; i < valueList.size(); i++){
 			mVarsMng.set(argList.get(i).getName(), valueList.get(i));
 		}
@@ -237,6 +249,22 @@ public class ShellVisitor implements ExprParserVisitor
 		return (resultValue);
 	}
 
+	public Object visit(ASTPartsStmt node, Object data)
+	{
+		int size = node.jjtGetNumChildren();
+		String viewName = (String)node.jjtGetChild(0).jjtAccept(this, null);
+
+		for (int i = 1; i < size; i += 3){
+			String funcName = (String)node.jjtGetChild(i).jjtAccept(this, null);
+			String eventType = (String)node.jjtGetChild(i + 1).jjtAccept(this, null);
+			ASTFuncBlock block = (ASTFuncBlock)node.jjtGetChild(i + 2);
+
+			mInterface.setEvent(viewName, funcName, block, eventType);
+		}
+
+		return (null);
+	}
+
 	public Object visit(ASTDimStmt node, Object data)
 	{
 		int type = toType(node.nodeValue);
@@ -272,6 +300,15 @@ public class ShellVisitor implements ExprParserVisitor
 		}
 		else if (str.equals("Boolean")){
 			return (IzaBasic.TYPE_BOOLEAN);
+		}
+		else if (str.equals("Button")){
+			return (IzaBasic.TYPE_BUTTON);
+		}
+		else if (str.equals("TextView")){
+			return (IzaBasic.TYPE_TEXTVIEW);
+		}
+		else if (str.equals("EditText")){
+			return (IzaBasic.TYPE_EDITTEXT);
 		}
 		else {
 			return (IzaBasic.TYPE_NONE);
@@ -598,13 +635,24 @@ public class ShellVisitor implements ExprParserVisitor
 		if (mVarsMng.usedName(name)){
 			IzaBasic value;
 			if (size == 0){
-				value = mVarsMng.get(name).getValue().clone();
+				if (mVarsMng.get(name).getValue() instanceof IzaView){
+					value = mVarsMng.get(name).getValue();
+				}
+				else {
+					value = mVarsMng.get(name).getValue().clone();
+				}
 			}
 			else {
 				ArrayList<Integer> indexList;
 				IzaArray izaArray = (IzaArray)mVarsMng.get(name).getValue();
 				indexList = (ArrayList<Integer>)node.jjtGetChild(0).jjtAccept(this, null);
-				value = izaArray.getValue(indexList).clone();
+
+				if (izaArray.getValue(indexList) instanceof IzaView){
+					value = izaArray.getValue(indexList);
+				}
+				else {
+					value = izaArray.getValue(indexList).clone();
+				}
 			}
 
 			return (value);

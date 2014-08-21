@@ -43,83 +43,95 @@ public interface ExprParserConstants {
   /** RegularExpression Id. */
   int AS = 20;
   /** RegularExpression Id. */
-  int RETURN = 21;
+  int PARTS = 21;
   /** RegularExpression Id. */
-  int BREAK = 22;
+  int ON = 22;
   /** RegularExpression Id. */
-  int CONTINUE = 23;
+  int RETURN = 23;
   /** RegularExpression Id. */
-  int PRINT = 24;
+  int BREAK = 24;
   /** RegularExpression Id. */
-  int TYPE = 25;
+  int CONTINUE = 25;
   /** RegularExpression Id. */
-  int PLUS = 26;
+  int PRINT = 26;
   /** RegularExpression Id. */
-  int MINUS = 27;
+  int TYPE = 27;
   /** RegularExpression Id. */
-  int MUL = 28;
+  int PLUS = 28;
   /** RegularExpression Id. */
-  int DIV = 29;
+  int MINUS = 29;
   /** RegularExpression Id. */
-  int MOD = 30;
+  int MUL = 30;
   /** RegularExpression Id. */
-  int POWER = 31;
+  int DIV = 31;
   /** RegularExpression Id. */
-  int AND = 32;
+  int MOD = 32;
   /** RegularExpression Id. */
-  int OR = 33;
+  int POWER = 33;
   /** RegularExpression Id. */
-  int NOT = 34;
+  int AND = 34;
   /** RegularExpression Id. */
-  int GE = 35;
+  int OR = 35;
   /** RegularExpression Id. */
-  int LE = 36;
+  int NOT = 36;
   /** RegularExpression Id. */
-  int GT = 37;
+  int GE = 37;
   /** RegularExpression Id. */
-  int LT = 38;
+  int LE = 38;
   /** RegularExpression Id. */
-  int EQ = 39;
+  int GT = 39;
   /** RegularExpression Id. */
-  int NEQ = 40;
+  int LT = 40;
   /** RegularExpression Id. */
-  int BOOLAND = 41;
+  int EQ = 41;
   /** RegularExpression Id. */
-  int BOOLOR = 42;
+  int NEQ = 42;
   /** RegularExpression Id. */
-  int ASSIGN = 43;
+  int BOOLAND = 43;
   /** RegularExpression Id. */
-  int ADDASSIGN = 44;
+  int BOOLOR = 44;
   /** RegularExpression Id. */
-  int SUBASSIGN = 45;
+  int ASSIGN = 45;
   /** RegularExpression Id. */
-  int MULASSIGN = 46;
+  int ADDASSIGN = 46;
   /** RegularExpression Id. */
-  int DIVASSIGN = 47;
+  int SUBASSIGN = 47;
   /** RegularExpression Id. */
-  int MODASSIGN = 48;
+  int MULASSIGN = 48;
   /** RegularExpression Id. */
-  int POWASSIGN = 49;
+  int DIVASSIGN = 49;
   /** RegularExpression Id. */
-  int LPAREN = 50;
+  int MODASSIGN = 50;
   /** RegularExpression Id. */
-  int RPAREN = 51;
+  int POWASSIGN = 51;
   /** RegularExpression Id. */
-  int LBRACKET = 52;
+  int LPAREN = 52;
   /** RegularExpression Id. */
-  int RBRACKET = 53;
+  int RPAREN = 53;
   /** RegularExpression Id. */
-  int COMMA = 54;
+  int LBRACKET = 54;
   /** RegularExpression Id. */
-  int STR_START = 55;
+  int RBRACKET = 55;
   /** RegularExpression Id. */
-  int INTEGER = 56;
+  int LBLOCK = 56;
   /** RegularExpression Id. */
-  int FLOAT = 57;
+  int RBLOCK = 57;
   /** RegularExpression Id. */
-  int IDENTIFIER = 58;
+  int COMMA = 58;
   /** RegularExpression Id. */
-  int STR = 63;
+  int DOT = 59;
+  /** RegularExpression Id. */
+  int SEMICOLON = 60;
+  /** RegularExpression Id. */
+  int STR_START = 61;
+  /** RegularExpression Id. */
+  int INTEGER = 62;
+  /** RegularExpression Id. */
+  int FLOAT = 63;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 64;
+  /** RegularExpression Id. */
+  int STR = 69;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -149,6 +161,8 @@ public interface ExprParserConstants {
     "\"End Select\"",
     "\"Dim\"",
     "\"as\"",
+    "\"Parts\"",
+    "\"on\"",
     "\"Return\"",
     "\"Break\"",
     "\"Continue\"",
@@ -182,14 +196,18 @@ public interface ExprParserConstants {
     "\")\"",
     "\"[\"",
     "\"]\"",
+    "\"{\"",
+    "\"}\"",
     "\",\"",
+    "\".\"",
+    "\";\"",
     "\"\\\"\"",
     "<INTEGER>",
     "<FLOAT>",
     "<IDENTIFIER>",
-    "<token of kind 59>",
+    "<token of kind 65>",
     "\"\\\\\\\"\"",
-    "<token of kind 61>",
+    "<token of kind 67>",
     "\"\\\\t\"",
     "\"\\\"\"",
   };

@@ -16,45 +16,46 @@ public interface ExprParserTreeConstants
   public int JJTIFSTMT = 10;
   public int JJTWHILESTMT = 11;
   public int JJTSELECTSTMT = 12;
-  public int JJTDIMSTMT = 13;
-  public int JJTBREAKSTMT = 14;
-  public int JJTCONTINUESTMT = 15;
-  public int JJTPRINTSTMT = 16;
-  public int JJTRETURNSTMT = 17;
-  public int JJTVOID = 18;
-  public int JJTASSIGN = 19;
-  public int JJTADDASSIGN = 20;
-  public int JJTSUBASSIGN = 21;
-  public int JJTMULASSIGN = 22;
-  public int JJTDIVASSIGN = 23;
-  public int JJTMODASSIGN = 24;
-  public int JJTPOWASSIGN = 25;
-  public int JJTBAND = 26;
-  public int JJTBOR = 27;
-  public int JJTEQ = 28;
-  public int JJTNEQ = 29;
-  public int JJTGE = 30;
-  public int JJTGT = 31;
-  public int JJTLE = 32;
-  public int JJTLT = 33;
-  public int JJTADD = 34;
-  public int JJTSUB = 35;
-  public int JJTMUL = 36;
-  public int JJTDIV = 37;
-  public int JJTMOD = 38;
-  public int JJTPOWER = 39;
-  public int JJTAND = 40;
-  public int JJTOR = 41;
-  public int JJTNOT = 42;
-  public int JJTUNIEXPR = 43;
-  public int JJTINTEGER = 44;
-  public int JJTFLOAT = 45;
-  public int JJTSTRING = 46;
-  public int JJTVAR = 47;
-  public int JJTREFVAR = 48;
-  public int JJTSUBSCRIPT = 49;
-  public int JJTFUNCNAME = 50;
-  public int JJTIDENTIFIER = 51;
+  public int JJTPARTSSTMT = 13;
+  public int JJTDIMSTMT = 14;
+  public int JJTBREAKSTMT = 15;
+  public int JJTCONTINUESTMT = 16;
+  public int JJTPRINTSTMT = 17;
+  public int JJTRETURNSTMT = 18;
+  public int JJTVOID = 19;
+  public int JJTASSIGN = 20;
+  public int JJTADDASSIGN = 21;
+  public int JJTSUBASSIGN = 22;
+  public int JJTMULASSIGN = 23;
+  public int JJTDIVASSIGN = 24;
+  public int JJTMODASSIGN = 25;
+  public int JJTPOWASSIGN = 26;
+  public int JJTBAND = 27;
+  public int JJTBOR = 28;
+  public int JJTEQ = 29;
+  public int JJTNEQ = 30;
+  public int JJTGE = 31;
+  public int JJTGT = 32;
+  public int JJTLE = 33;
+  public int JJTLT = 34;
+  public int JJTADD = 35;
+  public int JJTSUB = 36;
+  public int JJTMUL = 37;
+  public int JJTDIV = 38;
+  public int JJTMOD = 39;
+  public int JJTPOWER = 40;
+  public int JJTAND = 41;
+  public int JJTOR = 42;
+  public int JJTNOT = 43;
+  public int JJTUNIEXPR = 44;
+  public int JJTINTEGER = 45;
+  public int JJTFLOAT = 46;
+  public int JJTSTRING = 47;
+  public int JJTVAR = 48;
+  public int JJTREFVAR = 49;
+  public int JJTSUBSCRIPT = 50;
+  public int JJTFUNCNAME = 51;
+  public int JJTIDENTIFIER = 52;
 
 
   public String[] jjtNodeName = {
@@ -71,6 +72,7 @@ public interface ExprParserTreeConstants
     "IfStmt",
     "WhileStmt",
     "SelectStmt",
+    "PartsStmt",
     "DimStmt",
     "BreakStmt",
     "ContinueStmt",
@@ -112,4 +114,4 @@ public interface ExprParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=8198e66ff79bf58b6a9cfa0d76bcdfc6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=ae1c945165aca64d1c4b5efd235e8d4e (do not edit this line) */
