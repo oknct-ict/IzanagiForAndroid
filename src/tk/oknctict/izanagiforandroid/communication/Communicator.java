@@ -23,7 +23,7 @@ import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton.IWe
 public class Communicator {
 	private WebSocketHandlerSingleton wsHandler;
 	
-	ProgressDialog progressDialog = new ProgressDialog(LoginActivity.instance);
+	ProgressDialog progressDialog;
 	
 	/**
 	 * コンストラクタ
@@ -73,6 +73,8 @@ public class Communicator {
 		
 		JSONObject rootObject = generatePacket("", "login", dataObject);
 		
+		progressDialog = new ProgressDialog(LoginActivity.instance); // TODO: 不穏なにおい
+		
 		/* プログレスバーの設定 */
         progressDialog.setTitle("ログイン");
         // プログレスダイアログのメッセージを設定します
@@ -121,6 +123,8 @@ public class Communicator {
 				
 				/* プログレスバーの停止 */
 				progressDialog.dismiss();
+				
+				
 			}
 			
 			@Override
