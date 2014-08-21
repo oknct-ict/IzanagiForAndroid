@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MyAppActivity extends Activity {
+public class MyAppsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class MyAppActivity extends Activity {
 	}
 	
 	private class MyAppsAdapter extends BaseAdapter {
-		private ArrayList<ProjectData> dataList = new ArrayList<MyAppActivity.ProjectData>();
+		private ArrayList<ProjectData> dataList = new ArrayList<MyAppsActivity.ProjectData>();
 		
 		public void add(ProjectData data){
 			dataList.add(data);
