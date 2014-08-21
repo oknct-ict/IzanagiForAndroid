@@ -4,6 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/button_default"
     >
     <LinearLayout
         android:id="@+id/listlayout_LayoutLeft"
@@ -16,8 +17,8 @@
     <ImageView
 	    android:id="@+id/listlayout_listImage"
 	    android:padding="15dp"
-		android:layout_width="100dp"
-	    android:layout_height="100dp"
+		android:layout_width="80dp"
+	    android:layout_height="80dp"
 	    
 	    android:src="@drawable/documents"
 	  />

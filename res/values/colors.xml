@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="listBorder">#777777</color>
+    <color name="myapps_listBorder">#FFFFFF</color>
     
     <color name="login_loginbotton_string">#FFFFFF</color>
     <color name="login_newuserArea_background">#EEEEEE</color>
