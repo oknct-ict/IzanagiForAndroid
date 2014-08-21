@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,9 +19,12 @@ public class MyAppActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myapps);
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listlayout);
-		adapter.add("hoge1");
-		adapter.add("hoge2");
+		MyAppsAdapter adapter = new MyAppsAdapter();
+		
+		ProjectData proj1 = new ProjectData("hoge1", new Date());
+		ProjectData proj2 = new ProjectData("hoge2", new Date());
+		adapter.add(proj1);
+		adapter.add(proj2);
 		
 		ListView listView = (ListView)findViewById(R.id.myapps_listView);
 		listView.setAdapter(adapter);
@@ -31,6 +32,10 @@ public class MyAppActivity extends Activity {
 	
 	private class MyAppsAdapter extends BaseAdapter {
 		private ArrayList<ProjectData> dataList = new ArrayList<MyAppActivity.ProjectData>();
+		
+		public void add(ProjectData data){
+			dataList.add(data);
+		}
 		
 		@Override
 		public int getCount() {
@@ -62,16 +67,19 @@ public class MyAppActivity extends Activity {
 			/* レイアウトへのデータの設定 */
 			ProjectData projectData = dataList.get(position);
 			if (projectData != null){
-				ImageView listImage = (ImageView)findViewById(listItemLayoutId);
+				//ImageView listImage = (ImageView)findViewById(listItemLayoutId);
 				TextView projectNameText = (TextView)findViewById(listItemLayoutId);
 				TextView lastUpdate = (TextView)findViewById(listItemLayoutId);
 				
+				projectNameText.setText(projectData.getProjectName());
+				lastUpdate.setText(projectData.getLastUpdate().toString());
 			}
 			
-			return null;
+			return v;
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private class ProjectData {
 		private String mProjectName;
 		private Date mLastUpdate;
