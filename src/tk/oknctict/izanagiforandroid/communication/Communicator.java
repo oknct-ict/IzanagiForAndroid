@@ -61,7 +61,7 @@ public class Communicator {
 	 * @throws InterruptedException 
 	 * @throws NotYetConnectedException 
 	 */
-	public void login(String userId, String passwd) throws JSONException, NotYetConnectedException, InterruptedException {
+	public void login(String userId, String passwd, final IWebSocketHandlerListener eventListener) throws JSONException, NotYetConnectedException, InterruptedException {
 		/* JSONObjectの生成 */
 		JSONObject dataObject = new JSONObject();
 		dataObject.put("user_id", userId);
@@ -124,7 +124,7 @@ public class Communicator {
 				/* プログレスバーの停止 */
 				progressDialog.dismiss();
 				
-				
+				eventListener.onMessage(message);
 			}
 			
 			@Override
