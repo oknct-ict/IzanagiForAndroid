@@ -10,8 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tk.oknctict.izanagiforandroid.NoConnectionActivity;
-import tk.oknctict.izanagiforandroid.ServiceHelper;
+import tk.oknctict.izanagiforandroid.NowActivityHolder;
 import tk.oknctict.izanagiforandroid.SessionIdHolder;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.SparseArray;
@@ -219,10 +220,10 @@ public class WebSocketHandlerSingleton{
 	/* private */
 	private void connectionError(){
 		/* 全てのタスクをKillして最初からやり直す */
-		ServiceHelper helper = new ServiceHelper();
-		Intent intent = new Intent(helper.getApplication(), NoConnectionActivity.class);
+		Context context = NowActivityHolder.getContext();
+		Intent intent = new Intent(context, NoConnectionActivity.class);
 	    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    helper.startActivity(intent);
+	    context.startActivity(intent);
 	}
 	
 	/**
