@@ -68,8 +68,8 @@ public class MyAppsActivity extends Activity {
 			ProjectData projectData = dataList.get(position);
 			if (projectData != null){
 				//ImageView listImage = (ImageView)findViewById(listItemLayoutId);
-				TextView projectNameText = (TextView)findViewById(listItemLayoutId);
-				TextView lastUpdate = (TextView)findViewById(listItemLayoutId);
+				TextView projectNameText = (TextView)v.findViewById(R.id.listlayout_textview1);
+				TextView lastUpdate = (TextView)v.findViewById(R.id.listlayout_textview2);
 				
 				projectNameText.setText(projectData.getProjectName());
 				lastUpdate.setText(projectData.getLastUpdate().toString());
@@ -81,8 +81,8 @@ public class MyAppsActivity extends Activity {
 	
 	@SuppressWarnings("unused")
 	private class ProjectData {
-		private String mProjectName;
-		private Date mLastUpdate;
+		private String mProjectName = "";
+		private Date mLastUpdate = null;
 		
 		public ProjectData(){}
 		
