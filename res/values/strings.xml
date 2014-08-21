@@ -33,4 +33,7 @@
     <string name="menu_myapps">My Apps</string>
     <string name="menu_dlapps">DL Apps</string>
     <string name="menu_store">Store</string>
+    
+    <string name="noconnection_display_text">Not connected.</string>
+    <string name="noconnection_reconnect_button_text">Connect</string>
 </resources>

@@ -10,6 +10,7 @@ public class IzanagiExecuteActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		NowActivityHolder.setContext(this);
 		setContentView(R.layout.activity_izanagi_execute);
 	}
 

@@ -18,6 +18,7 @@ public class MyAppsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myapps);
+		NowActivityHolder.setContext(this);
 		
 		MyAppsAdapter adapter = new MyAppsAdapter();
 		
