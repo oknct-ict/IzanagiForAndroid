@@ -16,9 +16,9 @@
     	android:gravity="center_vertical"
     	android:layout_gravity="center" >
     	<ImageView 
-        	android:layout_width="150dp"
-        	android:layout_height="150dp"	
-        	android:src="@drawable/logo"
+        	android:layout_width="130dp"
+        	android:layout_height="130dp"	
+        	android:src="@drawable/Izanagi1"
         	 />
     	<TextView
     	    android:id="@+id/newuser_text_newuser"
