@@ -163,11 +163,7 @@ public class WebSocketHandlerSingleton{
 				WebSocketHandlerSingleton.delConnection();
 				SessionIdHolder.delSessionId();
 				
-				/* 全てのタスクをKillして最初からやり直す */
-				ServiceHelper helper = new ServiceHelper();
-				Intent intent = new Intent(helper.getApplication(), NoConnectionActivity.class);
-			    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			    helper.startActivity(intent);
+				connectionError();
 			}
 		};
 		
@@ -200,7 +196,13 @@ public class WebSocketHandlerSingleton{
 	 * @throws InterruptedException
 	 */
 	public void sendMessage(String message) throws NotYetConnectedException, InterruptedException {
-		mClient.send(message);
+		try {
+			mClient.send(message);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			connectionError();
+		}
 	}
 	
 	/**
@@ -215,6 +217,14 @@ public class WebSocketHandlerSingleton{
 	}
 	
 	/* private */
+	private void connectionError(){
+		/* 全てのタスクをKillして最初からやり直す */
+		ServiceHelper helper = new ServiceHelper();
+		Intent intent = new Intent(helper.getApplication(), NoConnectionActivity.class);
+	    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    helper.startActivity(intent);
+	}
+	
 	/**
 	 * mListenerがnullを持たなくてよいようにするための空のクラス
 	 * @author media
