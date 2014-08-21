@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import tk.oknctict.izanagi.variable.*;
 import tk.oknctict.izanagi.shell.*;
 import tk.oknctict.izanagi.parser.*;
+import tk.oknctict.izanagiforandroid.guimanager.GuiManagerSingleton;
+import tk.oknctict.izanagiforandroid.guimanager.GuiManagerSingleton.PartsIdNotfoundException;
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.GuiPartsEventListener;
+import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.LayoutParams;
 
 public class ShellInterface
 {
@@ -22,6 +26,7 @@ public class ShellInterface
 
 	private ShellVarsManager mVarsMng;
 	private ShellFuncs mFuncs;
+	private GuiManagerSingleton mGuiManager;
 
 	private ShellVisitor mVisitor;
 
@@ -29,6 +34,7 @@ public class ShellInterface
 	{
 		mVarsMng = ShellVarsManager.getInstance();
 		mFuncs = ShellFuncs.getInstance();
+		mGuiManager = GuiManagerSingleton.getInstance();
 		mVisitor = new ShellVisitor();
 	}
 	public static ShellInterface getInstance()
@@ -42,13 +48,14 @@ public class ShellInterface
 	}
 	public void setEvent(String name, String funcName, ASTFuncBlock block, String eventType)
 	{
-		int event = toEventType(eventType);
+		int event = toIEventType(eventType);
 
 		setEvent(name, funcName, block, event);
 	}
 	public void setEvent(String name, String funcName, ASTFuncBlock block, int eventType)
 	{
 		IzaBasic view = new IzaNone();
+		String viewId;
 
 		if (mVarsMng.usedName(name) == false){
 			System.out.println("not find view");
@@ -62,20 +69,97 @@ public class ShellInterface
 		}
 
 		IzaEvent event = new IzaEvent(funcName, block, eventType);
-		((IzaView)view).setEvent(event);
 		ShellArgs args = new ShellArgs();
 		ShellFunc func = new ShellFunc(funcName, args, view.getType(), block);
+		((IzaView)view).setEvent(event);
 
 		mFuncs.set(funcName, func);
+		
+//		viewId = String.valueOf(view.hashCode());
+//		GuiPartsEventListener listener = new GuiPartsEventListener();
+//		listener.addMap(toSEventType(eventType), funcName);
 	}
 
 	public void createView(IzaView view)
 	{
-
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = makeLayoutParams(view);
+		
+//		mGuiManager.addGuiParts(viewId, view.getType(), layout);
 	}
 	public void updateView(IzaView view)
 	{
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = makeLayoutParams(view);
 
+//		mGuiManager.setLayoutParams(viewId, layout);
+	}
+	
+	public int loadX(IzaView view)
+	{
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = null;
+
+//		layout = mGuiManager.getLayoutParams(viewId);
+//		return (layout.x);
+		
+		return (0);
+	}
+	public int loadY(IzaView view)
+	{
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = null;
+
+//		layout = mGuiManager.getLayoutParams(viewId);
+//		return (layout.y);
+		
+		return (0);
+	}
+	public int loadWidth(IzaView view)
+	{
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = null;
+
+//		layout = mGuiManager.getLayoutParams(viewId);
+//		return (layout.width);
+		
+		return (0);
+	}
+	public int loadHeight(IzaView view)
+	{
+		String viewId = String.valueOf(view.hashCode());
+		LayoutParams layout = null;
+
+//		layout = mGuiManager.getLayoutParams(viewId);
+//		return (layout.height);
+		
+		return (0);
+	}
+	public String loadText(IzaView view)
+	{
+		String viewId = String.valueOf(view.hashCode());
+		
+		try {
+			return (mGuiManager.getText(viewId));
+		} catch (PartsIdNotfoundException e) {
+			e.printStackTrace();
+		}
+
+		return ("");
+	}
+	
+	private LayoutParams makeLayoutParams(IzaView view)
+	{
+		int x, y;
+		int width, height;
+		
+		x = (int)view.getX();
+		y = (int)view.getY();
+		width  = (int)view.getWidth();
+		height = (int)view.getHeight();
+		LayoutParams layout = new LayoutParams(x, y, width, height);
+		
+		return (layout);
 	}
 
 	public void callFunc(String funcName)
@@ -180,12 +264,20 @@ public class ShellInterface
 		return (returnValue);
 	}
 
-	private int toEventType(String str)
+	private int toIEventType(String str)
 	{
 		if (str.equals(IzaEvent.EVENT_CLICK_NAME)){
 			return (IzaEvent.EVENT_CLICK);
 		}
 
 		return (IzaEvent.EVENT_NON);
+	}
+	private String toSEventType(int num)
+	{
+		if (num == IzaEvent.EVENT_CLICK){
+			return (IzaEvent.EVENT_CLICK_NAME);
+		}
+		
+		return ("");
 	}
 }

@@ -40,6 +40,7 @@ public abstract class  IzaView implements IzaBasic
 
 	public float getX()
 	{
+		mX = mShellInterface.loadX(this);
 		return (mX);
 	}
 	public void setX(float x)
@@ -50,6 +51,7 @@ public abstract class  IzaView implements IzaBasic
 
 	public float getY()
 	{
+		mY = mShellInterface.loadY(this);
 		return (mY);
 	}
 	public void setY(float y)
@@ -60,6 +62,7 @@ public abstract class  IzaView implements IzaBasic
 
 	public float getWidth()
 	{
+		mWidth = mShellInterface.loadWidth(this);
 		return (mWidth);
 	}
 	public void setWidth(float width)
@@ -70,6 +73,7 @@ public abstract class  IzaView implements IzaBasic
 
 	public float getHeight()
 	{
+		mHeight = mShellInterface.loadHeight(this);
 		return (mHeight);
 	}
 	public void setHeight(float height)
