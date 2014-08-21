@@ -12,6 +12,7 @@ public class NoConnectionActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		NowActivityHolder.setContext(this);
 		setContentView(R.layout.activity_noconnection);
 		
 		Button reConnectButton = (Button)findViewById(R.id.noconnection_reconnect_button);

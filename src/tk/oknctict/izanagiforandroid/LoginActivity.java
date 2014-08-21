@@ -27,6 +27,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		NowActivityHolder.setContext(this);
 		instance = this; // TODO: インスタンスが存在しない場合不安ですね・・・
 		
 		/* タイトル */
