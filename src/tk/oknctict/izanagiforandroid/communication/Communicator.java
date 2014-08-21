@@ -8,8 +8,10 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.util.Log;
 import tk.oknctict.izanagiforandroid.Constants;
+import tk.oknctict.izanagiforandroid.LoginActivity;
 import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton.IWebSocketHandlerListener;
@@ -20,6 +22,8 @@ import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton.IWe
  */
 public class Communicator {
 	private WebSocketHandlerSingleton wsHandler;
+	
+	ProgressDialog progressDialog;
 	
 	/**
 	 * コンストラクタ
@@ -57,7 +61,7 @@ public class Communicator {
 	 * @throws InterruptedException 
 	 * @throws NotYetConnectedException 
 	 */
-	public void login(String userId, String passwd) throws JSONException, NotYetConnectedException, InterruptedException {
+	public void login(String userId, String passwd, final IWebSocketHandlerListener eventListener) throws JSONException, NotYetConnectedException, InterruptedException {
 		/* JSONObjectの生成 */
 		JSONObject dataObject = new JSONObject();
 		dataObject.put("user_id", userId);
@@ -68,6 +72,25 @@ public class Communicator {
 		dataObject.put("device_data", deviceData);
 		
 		JSONObject rootObject = generatePacket("", "login", dataObject);
+		
+		progressDialog = new ProgressDialog(LoginActivity.instance); // TODO: 不穏なにおい
+		
+		/* プログレスバーの設定 */
+        progressDialog.setTitle("ログイン");
+        // プログレスダイアログのメッセージを設定します
+        progressDialog.setMessage("ログインしています...");
+        // プログレスダイアログの確定（false）／不確定（true）を設定します
+        progressDialog.setIndeterminate(false);
+        // プログレスダイアログのスタイルを円スタイルに設定します
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // プログレスダイアログの最大値を設定します
+        progressDialog.setMax(100);
+        // プログレスダイアログの値を設定します
+        progressDialog.incrementProgressBy(0);
+        // プログレスダイアログのキャンセルが可能かどうかを設定します
+        progressDialog.setCancelable(false);
+        // プログレスダイアログを表示します
+        progressDialog.show();
 		
 		/* データの送信 */
 		wsHandler.sendMessage(rootObject.toString());
@@ -97,6 +120,12 @@ public class Communicator {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				/* プログレスバーの停止 */
+				progressDialog.dismiss();
+				
+				/* 呼び出し元定義のイベントリスナも呼び出す */
+				eventListener.onMessage(message);
 			}
 			
 			@Override
