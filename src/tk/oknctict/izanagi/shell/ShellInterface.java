@@ -1,6 +1,8 @@
 package tk.oknctict.izanagi.shell;
 
 import java.util.ArrayList;
+
+import android.util.Log;
 import tk.oknctict.izanagi.variable.*;
 import tk.oknctict.izanagi.shell.*;
 import tk.oknctict.izanagi.parser.*;
@@ -87,53 +89,56 @@ public class ShellInterface
 		LayoutParams params = makeLayoutParams(view);
 		
 		IzanagiExecuteActivity.addView(viewId, view.getType(), params);
-//		mGuiManager.addGuiParts(viewId, view.getType(), layout);
+//		mGuiManager.addGuiParts(viewId, view.getType(), params);
 	}
 	public void updateView(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = makeLayoutParams(view);
-
-//		mGuiManager.setLayoutParams(viewId, layout);
+		LayoutParams params = makeLayoutParams(view);
+		String text = view.mText;
+		
+		IzanagiExecuteActivity.setParam(viewId, params);
+		IzanagiExecuteActivity.setText(viewId, text);
+//		mGuiManager.setLayoutParams(viewId, params);
 	}
 	
 	public int loadX(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = null;
+		LayoutParams params = null;
 
-//		layout = mGuiManager.getLayoutParams(viewId);
-//		return (layout.x);
+//		params = mGuiManager.getLayoutParams(viewId);
+//		return (params.x);
 		
 		return (0);
 	}
 	public int loadY(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = null;
+		LayoutParams params = null;
 
-//		layout = mGuiManager.getLayoutParams(viewId);
-//		return (layout.y);
+//		params = mGuiManager.getLayoutParams(viewId);
+//		return (params.y);
 		
 		return (0);
 	}
 	public int loadWidth(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = null;
+		LayoutParams params = null;
 
-//		layout = mGuiManager.getLayoutParams(viewId);
-//		return (layout.width);
+//		params = mGuiManager.getLayoutParams(viewId);
+//		return (params.width);
 		
 		return (0);
 	}
 	public int loadHeight(IzaView view)
 	{
 		String viewId = String.valueOf(view.hashCode());
-		LayoutParams layout = null;
+		LayoutParams params = null;
 
-//		layout = mGuiManager.getLayoutParams(viewId);
-//		return (layout.height);
+//		params = mGuiManager.getLayoutParams(viewId);
+//		return (params.height);
 		
 		return (0);
 	}
@@ -155,15 +160,15 @@ public class ShellInterface
 		int x, y;
 		int width, height;
 		
-		x = (int)view.getX();
-		y = (int)view.getY();
-//		width  = (int)view.getWidth();
-//		height = (int)view.getHeight();
+		x = (int)view.mX;
+		y = (int)view.mY;
+//		width  = (int)view.mWidth;
+//		height = (int)view.mHeight;
 		width = 200;
 		height = 100;
-		LayoutParams layout = new LayoutParams(x, y, width, height);
+		LayoutParams params = new LayoutParams(x, y, width, height);
 		
-		return (layout);
+		return (params);
 	}
 
 	public void callFunc(String funcName)

@@ -8,9 +8,9 @@ public abstract class  IzaView implements IzaBasic
 {
 	protected ShellInterface mShellInterface;
 	protected int mType;
-	private float mX, mY;
-	private float mWidth, mHeight;
-	private String mText;
+	public float mX, mY;
+	public float mWidth, mHeight;
+	public String mText;
 
 	private IzaEvent onClick;
 

@@ -1,5 +1,9 @@
 package tk.oknctict.izanagiforandroid;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.HashMap;
 
@@ -12,8 +16,10 @@ import tk.oknctict.izanagiforandroid.guimanager.GuiPartsHandler.LayoutParams;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +65,30 @@ public class IzanagiExecuteActivity extends Activity {
 //		mLinearLayout.addView(mDebugView, new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 //		setDebugMode();
 		
-		String code = "Dim button as Button";
+		Resources res = this.getResources();
+		InputStream is = res.openRawResource(R.raw.standardfunc);
+		BufferedReader br;
+		StringBuilder stdfunc;
+		String buf;
+		
+		br = new BufferedReader(new InputStreamReader(is));
+		stdfunc = new StringBuilder();
+		try {
+			while ((buf = br.readLine()) != null){
+				stdfunc.append(buf + "\n");
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		String code = "Dim button as Button\n" +
+					  "stdSetX(button, 100.0)\n" +
+					  "stdSetY(button, 100.0)\n" +
+					  "stdSetText(button, \"izanagi\")" +
+					  "Print stdGetX(button)";
+		
+		code = stdfunc.toString() + code;
+		Log.v("IzanagiActivity", code);
 		ExprParser parser = new ExprParser(new StringReader(code));
 		ShellVisitor visitor = new ShellVisitor();
 		try {
@@ -94,11 +123,44 @@ public class IzanagiExecuteActivity extends Activity {
 		
 		mRelativeLayout.addView(view, layoutParams);
 	}
-	public static void changeView(String viewId, LayoutParams params)
+	public static void setParam(String viewId, LayoutParams params)
 	{
 		View view;
 		view = mRelativeLayout.findViewById(Integer.valueOf(viewId));
 		
+		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(params.width, params.height);
+		layoutParams.setMargins(params.x, params.y, 0, 0);
+		
+		mRelativeLayout.removeView(view);
+		mRelativeLayout.addView(view, layoutParams);
+	}
+	public static void setText(String viewId, String text)
+	{
+		View view;
+		view = mRelativeLayout.findViewById(Integer.valueOf(viewId));
+		mRelativeLayout.removeView(view);
+		
+		if (view instanceof Button){
+			Button button = new Button(mContext);
+			button.setText(text);
+			button.setLayoutParams(view.getLayoutParams());
+			view = button;
+		}
+		else if (view instanceof TextView){
+			TextView textView = new TextView(mContext);
+			textView.setText(text);
+			textView.setLayoutParams(view.getLayoutParams());
+			view = textView;
+		}
+		else if (view instanceof EditText){
+			EditText editText = new EditText(mContext);
+			editText.setText(text);
+			editText.setLayoutParams(view.getLayoutParams());
+			view = editText;
+		}
+		
+		view.setId(Integer.valueOf(viewId));
+		mRelativeLayout.addView(view, view.getLayoutParams());
 	}
 	
 	private static View pickupView(int viewType)

@@ -17,3 +17,8 @@ Function stdGetHeight(id as String) as Integer
 End Function
 Function stdSetHeight(id as String, height as Float) as Float
 End Function
+
+Function stdGetText(id as String) as Integer
+End Function
+Function stdSetText(id as String, text as String) as Float
+End Function
