@@ -6,8 +6,12 @@ import java.nio.channels.NotYetConnectedException;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import android.os.Build;
+import android.util.SparseArray;
 
 /**
  * Websocketをハンドルするシングルトンクラス
@@ -22,6 +26,8 @@ public class WebSocketHandlerSingleton {
 	private static WebSocketClient mClient = null;
 	
 	private IWebSocketHandlerListener mListener = new EmptyListener();
+	
+	private static SparseArray<IWebSocketHandlerListener> mOnClieckListener = new SparseArray<WebSocketHandlerSingleton.IWebSocketHandlerListener>();
 	
 	/**
 	 * インスタンスの取得
@@ -42,6 +48,26 @@ public class WebSocketHandlerSingleton {
 		else {
 			return (true);
 		}
+	}
+	
+	/**
+	 * リクエストIDに対応したメッセージリスナを設定します
+	 * <pre>
+	 * IWebSocketHandlerListenerを指定しますがonMessageしか呼ばれません
+	 * </pre>
+	 * @param requestId リスンしたいリクエストIDを設定する
+	 * @param listener requestIdのメッセージの際に呼ばれるリスナ
+	 */
+	public void addOnMessageListener(int requestId, IWebSocketHandlerListener listener){
+		mOnClieckListener.put(requestId, listener);
+	}
+	
+	/**
+	 * リクエストIDのリスナを削除します
+	 * @param requestId 削除するリスナに対応するリクエストID
+	 */
+	public void delOnMessageListener(int requestId){
+		mOnClieckListener.delete(requestId);
 	}
 	
 	/**
@@ -88,6 +114,9 @@ public class WebSocketHandlerSingleton {
 			java.lang.System.setProperty("java.net.preferIPv4Stack", "true");
 		}
 		
+		/*
+		 * 接続の確立と共に、イベントリスナの設定もおこないます 
+		 */
 		mClient = new WebSocketClient(mUri){
 			@Override
 			public void onOpen(ServerHandshake handshake){
@@ -97,6 +126,27 @@ public class WebSocketHandlerSingleton {
 			@Override
 			public void onMessage(final String message){
 				mListener.onMessage(message);
+				
+				try {
+					JSONObject obj = new JSONObject(message);
+					
+					/*
+					 * PUSHコマンドなら処理をする。
+					 * そうでなければrequestIdでListenerを呼ぶ
+					 */
+					String command = obj.getString("command");
+					if (command == "run_start"){
+						
+					}
+					else {
+						int requestId = obj.getInt("request_id");
+						IWebSocketHandlerListener listener = mOnClieckListener.get(requestId);
+						listener.onMessage(message);
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			@Override
@@ -108,6 +158,7 @@ public class WebSocketHandlerSingleton {
 			public void onClose(int code, String reason, boolean remote){
 				mListener.onClose(code, reason, remote);
 				WebSocketHandlerSingleton.delConnection();
+				SessionIdHolder.delSessionId();
 			}
 		};
 		

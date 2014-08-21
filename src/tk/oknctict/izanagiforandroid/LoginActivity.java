@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +22,9 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		/* タイトル */
+		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示
 		setContentView(R.layout.activity_login);
 		
 		Button login_button = (Button)findViewById(id.login_login_button);

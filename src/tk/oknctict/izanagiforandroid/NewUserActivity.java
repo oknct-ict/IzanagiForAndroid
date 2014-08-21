@@ -41,18 +41,27 @@ public class NewUserActivity extends Activity {
 				EditText passwd = (EditText)findViewById(R.id.newuser_password);
 				EditText passwdAgain = (EditText)findViewById(R.id.newuser_password_again);
 				EditText email = (EditText)findViewById(R.id.newuser_email);
+				Spinner institutionSpinner = (Spinner)findViewById(R.id.newuser_institution);
+				EditText grade = (EditText)findViewById(R.id.newuser_grade);
 				
 				if (passwd.getText().equals(passwdAgain.getText())){
 					// TODO: パスワードが再入力と一致しなかった場合、リジェクト
 					return;
 				}
 				
+				/* それぞれの値の取得 */
+				String newUserIdStr = userId.getText().toString();
+				String newPasswdStr = passwd.getText().toString();
+				String newEmailStr = email.getText().toString();
+				int institutionId = institutionSpinner.getSelectedItemPosition() + 1;
+				int gradeNum = Integer.parseInt(grade.getText().toString());
+				
 				/* リクエスト処理 */
 				try {
 					Communicator communicator = new Communicator();
 					communicator.establishConnection();
 					try {
-						communicator.newUserRequest(userId.getText().toString(), passwd.getText().toString(), email.getText().toString(), 1, 1);
+						communicator.newUserRequest(newUserIdStr, newPasswdStr, newEmailStr, institutionId, gradeNum);
 					} catch (NotYetConnectedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -73,6 +82,15 @@ public class NewUserActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		});
+		
+		/* キャンセルボタン */
+		Button canceleButton = (Button)findViewById(R.id.newuser_cancel_button);
+		canceleButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				NewUserActivity.this.finish();
 			}
 		});
 	}

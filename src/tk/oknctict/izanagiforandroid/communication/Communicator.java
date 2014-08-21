@@ -4,11 +4,15 @@ import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
 import java.util.UUID;
 
+import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
 import tk.oknctict.izanagiforandroid.Constants;
+import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton;
+import tk.oknctict.izanagiforandroid.communication.WebSocketHandlerSingleton.IWebSocketHandlerListener;
 
 /**
  * Izanagi for Androidに必要な通信を行うクラス
@@ -59,10 +63,49 @@ public class Communicator {
 		dataObject.put("user_id", userId);
 		dataObject.put("password", passwd);
 		
+		JSONObject deviceData = new JSONObject();
+		deviceData.put("device_id", android.os.Build.ID);
+		dataObject.put("device_data", deviceData);
+		
 		JSONObject rootObject = generatePacket("", "login", dataObject);
 		
 		/* データの送信 */
 		wsHandler.sendMessage(rootObject.toString());
+		
+		/*
+		 * loginはハンドシェイクも兼ねているので、
+		 * ログインリクエストのレスポンスに含まれるセッションIDが通信のための認証キーになってます
+		 */
+		wsHandler.addOnMessageListener(rootObject.getInt("request_id"), new IWebSocketHandlerListener() {
+			@Override
+			public void onMessage(String message) {
+				Log.d("WebSocketHandlerSingleton", message);
+				
+				//受け取ったJSONのパース
+				JSONObject obj = null;
+				try {
+					obj = new JSONObject(message);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				//セッションIDの保存
+				try {
+					SessionIdHolder.setSessionId(obj.getString("session_id"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onError(Exception ex) {}
+			@Override
+			public void onClose(int code, String reason, boolean remote) {}
+			@Override
+			public void onOpen(ServerHandshake handshakedata) {}
+		});
 	}
 	public static final int ERROR_CANNOT_USE_SHA1 = 1;
 	public static final int ERROR_CANNOT_GENERATE_JSON = 2;
