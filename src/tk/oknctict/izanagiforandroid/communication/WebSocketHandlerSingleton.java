@@ -9,7 +9,12 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tk.oknctict.izanagiforandroid.NoConnectionActivity;
 import tk.oknctict.izanagiforandroid.SessionIdHolder;
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.SparseArray;
 
@@ -159,6 +164,10 @@ public class WebSocketHandlerSingleton {
 				mListener.onClose(code, reason, remote);
 				WebSocketHandlerSingleton.delConnection();
 				SessionIdHolder.delSessionId();
+				
+				//Intent intent = new Intent(Activity.getApplication(), NoConnectionActivity.class);
+			    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			    //startActivity(intent);
 			}
 		};
 		
