@@ -124,6 +124,7 @@ public class Communicator {
 				/* プログレスバーの停止 */
 				progressDialog.dismiss();
 				
+				/* 呼び出し元定義のイベントリスナも呼び出す */
 				eventListener.onMessage(message);
 			}
 			
