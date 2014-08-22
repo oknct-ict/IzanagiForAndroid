@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/button_default"
     >
-    <LinearLayout
-        android:id="@+id/listlayout_LayoutLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        >
 	<!-- ファイル画像 -->
     <ImageView
 	    android:id="@+id/listlayout_listImage"
-	    android:padding="15dp"
+	    android:padding="10dp"
 		android:layout_width="80dp"
-	    android:layout_height="80dp"
-	    
+	    android:layout_height="80dp"	    
 	    android:src="@drawable/documents"
 	  />
-    </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/listlayout_LayoutRight"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/listlayout_LayoutLeft"
+        android:layout_height="80dp"
         android:orientation="vertical">   
 
     <!-- ファイル名 -->
@@ -35,7 +25,9 @@
   		android:id="@+id/listlayout_textview1"
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
-  		android:textSize="30sp"
+  		android:layout_alignParentTop="true"
+  		android:layout_alignParentLeft="true"
+  		android:textSize="25sp"
   		android:paddingTop="5dp"
   		android:paddingRight="3dp"
   		android:paddingBottom="3dp"
@@ -48,13 +40,14 @@
   		android:id="@+id/listlayout_textview2"
   		android:layout_width="wrap_content" 
   		android:layout_height="wrap_content"
-  		android:textSize="20sp"
+  		android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+  		android:textSize="12sp"
   		android:paddingTop="3dp"
   		android:paddingRight="15dp"
   		android:paddingBottom="3dp"
   		android:paddingLeft="3dp"
   		android:text="@string/listlayout_date" 
-  		android:layout_gravity="right" 
-  		/>
-    </LinearLayout>
-</RelativeLayout>
+  		android:layout_gravity="right" 	/>
+	</RelativeLayout>
+</LinearLayout>

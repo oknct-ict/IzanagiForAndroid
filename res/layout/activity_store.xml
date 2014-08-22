@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|right" >
+        <EditText
+            android:id="@+id/store_username"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:padding="7dp"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="@string/store_search_hint"
+            android:background="@drawable/store_search_frame"
+            >
+            <requestFocus />
+        </EditText>
+        <View 
+        android:layout_width="10dp"
+        android:layout_height="fill_parent"/>
+    	<Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="50dp"
+            android:background="@drawable/store_search" />    
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/store_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@color/myapps_listBorder"
+ 		android:dividerHeight="3dp"
+		android:fadeScrollbars="false"
+		android:fastScrollEnabled="true"
+		android:choiceMode="singleChoice"
+    />
+
+</LinearLayout>
+
