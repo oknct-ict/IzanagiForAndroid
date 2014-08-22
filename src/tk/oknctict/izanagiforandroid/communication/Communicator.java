@@ -212,7 +212,7 @@ public class Communicator {
 	public void postFinishedExecution(ExecutionResult result) throws JSONException, NotYetConnectedException, InterruptedException{
 		/* JSONObjectÇÃê∂ê¨ */
 		JSONObject dataObject = new JSONObject();
-		dataObject.put("result", result.resultId);
+		dataObject.put("execution_result", result.resultId);
 		dataObject.put("device_id", android.os.Build.ID);
 		
 		JSONObject rootObject = generatePacket(SessionIdHolder.getSessionId(), "run_end_android", dataObject);
@@ -221,7 +221,7 @@ public class Communicator {
 		wsHandler.sendMessage(rootObject.toString());
 	}
 	
-	public class ExecutionResult {
+	public static class ExecutionResult {
 		public int resultId;
 		
 		public ExecutionResult(){}
@@ -249,7 +249,7 @@ public class Communicator {
 		wsHandler.sendMessage(rootObject.toString());
 	}
 	
-	public class LogMessage {
+	public static class LogMessage {
 		public String tag;
 		public String msg;
 		
