@@ -13,6 +13,7 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		NowActivityHolder.setContext(this);
 		
 		/* レイアウト */
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルの非表示

@@ -9,7 +9,11 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tk.oknctict.izanagiforandroid.NoConnectionActivity;
+import tk.oknctict.izanagiforandroid.NowActivityHolder;
 import tk.oknctict.izanagiforandroid.SessionIdHolder;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.SparseArray;
 
@@ -17,7 +21,7 @@ import android.util.SparseArray;
  * Websocketをハンドルするシングルトンクラス
  * @author marusa
  */
-public class WebSocketHandlerSingleton {
+public class WebSocketHandlerSingleton{
 	/* for singleton */
 	private static WebSocketHandlerSingleton mInstance = new WebSocketHandlerSingleton();
 	private WebSocketHandlerSingleton() {}
@@ -159,6 +163,8 @@ public class WebSocketHandlerSingleton {
 				mListener.onClose(code, reason, remote);
 				WebSocketHandlerSingleton.delConnection();
 				SessionIdHolder.delSessionId();
+				
+				connectionError();
 			}
 		};
 		
@@ -191,7 +197,13 @@ public class WebSocketHandlerSingleton {
 	 * @throws InterruptedException
 	 */
 	public void sendMessage(String message) throws NotYetConnectedException, InterruptedException {
-		mClient.send(message);
+		try {
+			mClient.send(message);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			connectionError();
+		}
 	}
 	
 	/**
@@ -206,6 +218,14 @@ public class WebSocketHandlerSingleton {
 	}
 	
 	/* private */
+	private void connectionError(){
+		/* 全てのタスクをKillして最初からやり直す */
+		Context context = NowActivityHolder.getContext();
+		Intent intent = new Intent(context, NoConnectionActivity.class);
+	    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    context.startActivity(intent);
+	}
+	
 	/**
 	 * mListenerがnullを持たなくてよいようにするための空のクラス
 	 * @author media
