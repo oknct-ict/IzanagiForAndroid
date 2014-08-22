@@ -13,14 +13,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/izanagi_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:logo="@drawable/izanagi_gray" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-        </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
@@ -29,7 +25,7 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -46,8 +42,15 @@
         </activity>
         <activity
             android:name=".MyAppsActivity"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name" >                         
+        </activity>
+        <activity
+            android:name=".DlAppsActivity"
+            android:label="@string/app_name" >                         
+        </activity>
+        <activity
+            android:name=".StoreActivity"
+            android:label="@string/app_name" >                         
         </activity>
         <activity
             android:name=".NoConnectionActivity"

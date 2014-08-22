@@ -18,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
@@ -38,7 +37,7 @@ public class LoginActivity extends Activity {
 		login_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
 				
 				EditText usernameBox = (EditText)findViewById(R.id.login_username);
 				EditText passwdBox = (EditText)findViewById(R.id.login_password);
