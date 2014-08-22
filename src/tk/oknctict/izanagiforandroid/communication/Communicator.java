@@ -183,6 +183,86 @@ public class Communicator {
 	public static final int SCHOOL_ID_COLLAGE = 7;
 	public static final int SCHOOL_ID_OTHER = 8;
 	
+	/**
+	 * 実行要求が来たら返事します
+	 * @param result
+	 * @throws JSONException
+	 * @throws NotYetConnectedException
+	 * @throws InterruptedException
+	 */
+	public void runStateNote(int result) throws JSONException, NotYetConnectedException, InterruptedException{
+		/* JSONObjectの生成 */
+		JSONObject dataObject = new JSONObject();
+		dataObject.put("result", result);
+		dataObject.put("device_id", android.os.Build.ID);
+		
+		JSONObject rootObject = generatePacket(SessionIdHolder.getSessionId(), "run_start", dataObject);
+		
+		/* データの送信 */
+		wsHandler.sendMessage(rootObject.toString());
+	}
+	
+	/**
+	 * Izanagiの実行が終了したことを通知します
+	 * @param result
+	 * @throws JSONException
+	 * @throws NotYetConnectedException
+	 * @throws InterruptedException
+	 */
+	public void postFinishedExecution(ExecutionResult result) throws JSONException, NotYetConnectedException, InterruptedException{
+		/* JSONObjectの生成 */
+		JSONObject dataObject = new JSONObject();
+		dataObject.put("result", result.resultId);
+		dataObject.put("device_id", android.os.Build.ID);
+		
+		JSONObject rootObject = generatePacket(SessionIdHolder.getSessionId(), "run_end_android", dataObject);
+		
+		/* データの送信 */
+		wsHandler.sendMessage(rootObject.toString());
+	}
+	
+	public class ExecutionResult {
+		public int resultId;
+		
+		public ExecutionResult(){}
+		public ExecutionResult(int resultId){
+			this.resultId = resultId;
+		}
+	}
+	
+	/**
+	 * Logを送信します
+	 * @param logMessage
+	 * @throws JSONException 
+	 * @throws InterruptedException 
+	 * @throws NotYetConnectedException 
+	 */
+	public void postLog(LogMessage logMessage) throws JSONException, NotYetConnectedException, InterruptedException{
+		/* JSONObjectの生成 */
+		JSONObject dataObject = new JSONObject();
+		dataObject.put("log", logMessage.toString());
+		dataObject.put("device_id", android.os.Build.ID);
+		
+		JSONObject rootObject = generatePacket(SessionIdHolder.getSessionId(), "log_android", dataObject);
+		
+		/* データの送信 */
+		wsHandler.sendMessage(rootObject.toString());
+	}
+	
+	public class LogMessage {
+		public String tag;
+		public String msg;
+		
+		public LogMessage(){}
+		public LogMessage(String tag, String msg){
+			this.tag = tag;
+			this.msg = msg;
+		}
+		
+		public String toString(){
+			return ("\"" + tag + "\" : \"" + msg + "\"");
+		}
+	}
 	
 	/* private */
 	private JSONObject generatePacket(String sessionId, String command, JSONObject data) throws JSONException{

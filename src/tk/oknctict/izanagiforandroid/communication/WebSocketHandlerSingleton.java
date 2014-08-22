@@ -15,6 +15,7 @@ import tk.oknctict.izanagiforandroid.SessionIdHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.util.SparseArray;
 
 /**
@@ -134,13 +135,32 @@ public class WebSocketHandlerSingleton{
 				try {
 					JSONObject obj = new JSONObject(message);
 					
+					Log.d("resv Message", message);
+					
 					/*
 					 * PUSHコマンドなら処理をする。
 					 * そうでなければrequestIdでListenerを呼ぶ
 					 */
 					String command = obj.getString("command");
-					if (command == "run_start"){
+					Log.d("Command", command);
+					if (command.equals("run_start")){
+						Log.d("Run request", "run request is come");
 						
+						try {
+							Communicator communicator = new Communicator();
+							try {
+								communicator.runStateNote(0);
+							} catch (NotYetConnectedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} catch (URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					else {
 						int requestId = obj.getInt("request_id");
