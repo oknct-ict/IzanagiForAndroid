@@ -1,15 +1,24 @@
 package tk.oknctict.izanagiforandroid;
 
+import java.net.URISyntaxException;
+import java.nio.channels.NotYetConnectedException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONException;
+
+import tk.oknctict.izanagiforandroid.communication.Communicator;
+import tk.oknctict.izanagiforandroid.communication.Communicator.ExecutionResult;
+import tk.oknctict.izanagiforandroid.communication.Communicator.LogMessage;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +38,31 @@ public class MyAppsActivity extends Activity {
 		
 		ListView listView = (ListView)findViewById(R.id.myapps_listView);
 		listView.setAdapter(adapter);
+		
+		Button testButton = (Button)findViewById(R.id.myapps_test_button);
+		testButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Communicator communicator;
+				try {
+					communicator = new Communicator();
+					communicator.postLog(new LogMessage("test", "This is a test message."));
+					communicator.postFinishedExecution(new ExecutionResult(0));
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NotYetConnectedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	private class MyAppsAdapter extends BaseAdapter {
